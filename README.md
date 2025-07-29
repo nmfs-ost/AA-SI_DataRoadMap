@@ -47,7 +47,7 @@ flowchart TB
     end
     subgraph SurveyMetaData["**Survey Metadata**"]
         direction LR
-        idRF@{ shape: stadium, label: "Raw File" } --> idSMD@{ shape: database, label: "link to survey metadata" }
+        idRF@{ shape: stadium, label: "Raw File" } --> idSMD@{ shape: database, label: <a href="https://github.com/nmfs-ost/AA-SI_metadata"> "Survey Metadata"</a> }
     end
     subgraph ESManufacturer["**Echosounder Manufacturer**"]
         direction LR

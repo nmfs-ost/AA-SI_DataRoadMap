@@ -60,9 +60,16 @@ flowchart TB
         idBS@{ shape: rounded, label: "BioSonics" } --> idBSMD@{ shape: tag-doc, label: "link to BioSonics data file format and metadata" }
         idASL@{ shape: rounded, label: "ASL" } --> idASLMD@{ shape: tag-doc, label: "link to ASL data file format and metadata" }
     end
+    subgraph L0Data["**Level 0 Data**"]
+        direction TB
+        idL0RD@{ shape: rounded, label: "Raw File" }
+        idL0SMD@{ shape: database, label: "Survey Metadata" }
+        idRFMD@{ shape: database, label: "File-level Metadata" }
+    end
     DataSource --> SurveyMetaData
     SurveyMetaData --> ESManufacturer
     ESManufacturer --> ESMetaData
+    ESMetaData --> L0Data
 ```
 
 Level 0 data are survey-level and file-level metadata and the raw data file.

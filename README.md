@@ -73,3 +73,17 @@ flowchart TB
 ```
 
 Level 0 data are survey-level and file-level metadata and the raw data file.
+
+# Level 1 Data
+```mermaid
+flowchart TB
+    subgraph L0Data["**Level 0 Data**"]
+        direction TB
+        idL0RD@{ shape: rounded, label: "Raw File" }
+        idL0SMD@{ shape: database, label: "Survey Metadata" }
+        idRFMD@{ shape: database, label: "File-level Metadata" }
+    end
+L0Data --> idQAQC@{ shape: rounded, label: "Apply QA/QC algorithms" }
+idQAQC --> idAcceptReject@{ shape: diamond, label: "Accept or Reject File" }
+
+```

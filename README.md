@@ -38,38 +38,38 @@ For the AA-SI, we define the levels as:
 ## Level 0 Data
 ```mermaid
 flowchart TB
-    subgraph DataSource["**Raw Data Source**"]
+    subgraph SG_DataSource["**Raw Data Source**"]
         direction TB
-        idSrcOMAO@{shape: stadium, label: "OMAO Data Lake"} --> idOMAO@{ shape: tag-doc, label: "Retrieve Data from OMAO: link to instructions" }
-        idSrcNCEI@{shape: stadium, label: "NCEI"} --> idNCEI@{ shape: tag-doc, label: "Retrieve Data from NCEI: link to instructions" }
-        idSrcGCP@{shape: stadium, label: "GCP Prod Storage"} --> idGCP@{ shape: tag-doc, label: "Retrieve Data from GCP: link to instructions" }
-        idSrcOP@{shape: stadium, label: "On-Prem Storage"} --> idOP@{ shape: tag-doc, label: "Retrieve Data from On-prem: link to instructions" }
+        node_SrcOMAO@{shape: lean-r, label: "OMAO Data Lake"} --> node_OMAO@{ shape: tag-doc, label: "Retrieve Data from OMAO: link to instructions" }
+        node_SrcNCEI@{shape: lean-r, label: "NCEI"} --> node_NCEI@{ shape: tag-doc, label: "Retrieve Data from NCEI: link to instructions" }
+        node_SrcGCP@{shape: lean-r, label: "GCP Prod Storage"} --> node_GCP@{ shape: tag-doc, label: "Retrieve Data from GCP: link to instructions" }
+        node_SrcOP@{shape: lean-r, label: "On-Prem Storage"} --> node_OP@{ shape: tag-doc, label: "Retrieve Data from On-prem: link to instructions" }
     end
-    subgraph SurveyMetaData["**Survey Metadata**"]
+    subgraph SG_SurveyMetaData["**Survey Metadata**"]
         direction LR
-        idRF@{ shape: stadium, label: "Raw File" } --> idSMD@{ shape: database, label: <a href="https://github.com/nmfs-ost/AA-SI_metadata"> "Survey Metadata"</a> }
+        node_RF@{ shape: rounded, label: "Raw File" } --> node_SMD@{ shape: database, label: <a href="https://github.com/nmfs-ost/AA-SI_metadata"> "Survey Metadata"</a> }
     end
-    subgraph ESManufacturer["**Echosounder Manufacturer**"]
+    subgraph SG_ESManufacturer["**Echosounder Manufacturer**"]
         direction LR
-        idAL1@{shape: tag-doc, label: "AA Library Function: link to instructions"} --> idMan@{ shape: diamond, label: "Select Manufacturer" }
-        idAL2@{shape: tag-doc, label: "EchoPype Function: link to instructions"} --> idMan
+        node_AL1@{shape: tag-doc, label: "AA Library Function: link to instructions"} --> node_Man@{ shape: diamond, label: "Select Manufacturer" }
+        node_AL2@{shape: tag-doc, label: "EchoPype Function: link to instructions"} --> node_Man
     end
-    subgraph ESMetaData["**Data File Format \& Metadata**"]
+    subgraph SG_ESMetaData["**Data File Format \& Metadata**"]
         direction TB
-        idKS@{ shape: rounded, label: "Kongsberg-Simrad" } --> idKSMD@{ shape: tag-doc, label: "link to Kongsberg-Simrad data file format and metadata" }
-        idBS@{ shape: rounded, label: "BioSonics" } --> idBSMD@{ shape: tag-doc, label: "link to BioSonics data file format and metadata" }
-        idASL@{ shape: rounded, label: "ASL" } --> idASLMD@{ shape: tag-doc, label: "link to ASL data file format and metadata" }
+        node_KS@{ shape: rounded, label: "Kongsberg-Simrad" } --> node_KSMD@{ shape: tag-doc, label: "link to Kongsberg-Simrad data file format and metadata" }
+        node_BS@{ shape: rounded, label: "BioSonics" } --> node_BSMD@{ shape: tag-doc, label: "link to BioSonics data file format and metadata" }
+        node_ASL@{ shape: rounded, label: "ASL" } --> node_ASLMD@{ shape: tag-doc, label: "link to ASL data file format and metadata" }
     end
-    subgraph L0Data["**Level 0 Data**"]
+    subgraph SG_L0Data["**Level 0 Data**"]
         direction TB
-        idL0RD@{ shape: rounded, label: "Raw File" }
-        idL0SMD@{ shape: database, label: "Survey Metadata" }
-        idRFMD@{ shape: database, label: "File-level Metadata" }
+        node_L0RD@{ shape: rounded, label: "Raw File" }
+        node_L0SMD@{ shape: database, label: "Survey Metadata" }
+        node_RFMD@{ shape: database, label: "File-level Metadata" }
     end
-    DataSource --> SurveyMetaData
-    SurveyMetaData --> ESManufacturer
-    ESManufacturer --> ESMetaData
-    ESMetaData --> L0Data
+    SG_DataSource --> SG_SurveyMetaData
+    SG_SurveyMetaData --> SG_ESManufacturer
+    SG_ESManufacturer --> SG_ESMetaData
+    SG_ESMetaData --> SG_L0Data
 ```
 
 Level 0 data are survey-level and file-level metadata and the raw data file.
@@ -77,13 +77,20 @@ Level 0 data are survey-level and file-level metadata and the raw data file.
 # Level 1 Data
 ```mermaid
 flowchart TB
-    subgraph L0Data["**Level 0 Data**"]
+    subgraph SG_L0Data["**Level 0 Data**"]
         direction TB
-        idL0RD@{ shape: rounded, label: "Raw File" }
-        idL0SMD@{ shape: database, label: "Survey Metadata" }
-        idRFMD@{ shape: database, label: "File-level Metadata" }
+        node_L0RF@{ shape: rounded, label: "Raw File" }
+        node_L0SMD@{ shape: database, label: "Survey Metadata" }
+        node_RFMD@{ shape: database, label: "File-level Metadata" }
     end
-L0Data --> idQAQC@{ shape: rounded, label: "Apply QA/QC algorithms" }
-idQAQC --> idAcceptReject@{ shape: diamond, label: "Accept or Reject File" }
+    subgraph SG_AcceptFile["**QA/QC Accepted**"]
+        direction LR
+        node_L0RF1@{ shape: rounded, label: "Raw File" } --> node_RFAD@{ shape: database, label: "Raw File Ancillary Data" }
+    end
+SG_L0Data --> node_QAQC@{ shape: rounded, label: "Apply QA/QC algorithms" }
+node_QAQC --> node_AcceptReject@{ shape: diamond, label: "Accept or Reject File" }
+node_AcceptReject --> |Accept| SG_AcceptFile
+node_AcceptReject --> |Reject| node_Reject@{ shape: rounded, label: "Reject file flowchart: ??" }
+
 
 ```

@@ -19,9 +19,9 @@ For the AA-SI, we define the levels as:
     - Reformat manufacturer-specified-format active-acoustic data to open-format (<a href="https://htmlpreview.github.io/?https://github.com/ices-publications/SONAR-netCDF4/blob/master/Formatted_docs/crr341.html"> "ICES SONAR-netCDF4"</a>) format,
     - Reformat supplemental data to open-format, 
     - Collate validated calibration data and metadata for supplemental data,
-    - Output: Open-format, SONAR-netCDF4 for active-acoustic data, data with supplemental data and metadata to be used for processing the active-acoustic data.
+    - Output: Data files in SONAR-netCDF4 and Echopype open-formats for active-acoustic data, and supplemental data and metadata to be used for processing the active-acoustic data.
 - **Level 2**
-    - Input: Level 1 data - files in open data formats,
+    - Input: Level 1 data - files in Echopype format - i.e, with volume and point-backscatter in Python (<a href="https://docs.xarray.dev/en/stable/"> "Xarray"</a>) format,
     - Apply missing ancillary data (e.g., missing GPS),
     - Apply motion, sound-speed, and attenuation corrections,
     - Apply validated calibration data,

@@ -13,14 +13,14 @@ For active acoustic data, we define the levels and processes within those levels
     - Output: survey-level and file-level metadata.
 - **Level 1**
     - Input: Level 0 data - raw data file, survey-level, and file-level metadata,
-    - Apply quality assurance (QA)/quality control (QC) criteria, e.g.,
-        - time-coordinate corrections
-        - notification of missing data
     - Harvest all ancillary data (e.g., motion, GPS, sound speed, attenuation, ...) recorded within the level 0 raw data file,
-    - Determine whether supplemental data are required (e.g., missing GPS), and if so, assemble those data,
+    - Apply quality assurance (QA)/quality control (QC) criteria, e.g.,
+        - Determine whether required supplemental data are missing (e.g., GPS)
+        - Apply time-coordinate corrections
+        - Check for missing data
+    - Continue if the file passes QA/QC
     - Reformat manufacturer-specified-format active-acoustic data to "Echopype" or <a href="https://htmlpreview.github.io/?https://github.com/ices-publications/SONAR-netCDF4/blob/master/Formatted_docs/crr341.html"> "ICES SONAR-netCDF4"</a> open formats,
-    - Reformat supplemental data to open-format, 
-    - Collate validated calibration data and metadata for supplemental data,
+    - Collate calibration data and metadata for supplemental data,
     - Output: Data files in Echopype open-format for active-acoustic data, and supplemental data and metadata to be used for processing the active-acoustic data.
         - The default is Echopype format, which we use as input to L2 and higher.
         - We also provide data in strict sonarNET-CDF4 format as output to L1.  
@@ -89,13 +89,19 @@ flowchart TB
         node_RFMD@{ shape: database, label: "File-level Metadata" }
     end
     subgraph SG_AcceptFile["**QA/QC Accepted**"]
-        direction LR
-        node_L0RF1@{ shape: rounded, label: "Raw File" } --> node_RFAD@{ shape: database, label: "Raw File Ancillary Data" }
+        direction TB
+        node_L0RF1@{ shape: rounded, label: "Raw File" }
+        node_RFSD@{ shape: database, label: "Supplemental Data" }
+        node_EPF@{ shape: rounded, label: "Echopype File" }
+        node_L0RF1 --> node_EPF
+        node_RFSD --> node_EPF
     end
-SG_L0Data --> node_QAQC@{ shape: rounded, label: "Apply QA/QC algorithms<br/>link to time correction<br/>missing data" }
+SG_L0Data --> node_QAQC@{ shape: rounded, label: "Apply QA/QC algorithms<br/>&bull; link to required supplemental data<br/>&bull; link to time correction<br/>&bull; link to missing data check<br/>&bull; etc..." }
+style node_QAQC text-align:left
 node_QAQC --> node_AcceptReject@{ shape: diamond, label: "Accept or Reject File" }
 node_AcceptReject --> |Accept| SG_AcceptFile
 node_AcceptReject --> |Reject| node_Reject@{ shape: rounded, label: "Reject file flowchart: ??" }
 
 
 ```
+Level 1 data are the Echopype netCDF4 data file, supplemental data files and metadata.

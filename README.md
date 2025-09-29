@@ -92,7 +92,7 @@ flowchart TB
         direction LR
         node_L0RF1@{ shape: rounded, label: "Raw File" } --> node_RFAD@{ shape: database, label: "Raw File Ancillary Data" }
     end
-SG_L0Data --> node_QAQC@{ shape: rounded, label: "Apply QA/QC algorithms" }
+SG_L0Data --> node_QAQC@{ shape: rounded, label: "Apply QA/QC algorithms<br/>link to time correction<br/>missing data" }
 node_QAQC --> node_AcceptReject@{ shape: diamond, label: "Accept or Reject File" }
 node_AcceptReject --> |Accept| SG_AcceptFile
 node_AcceptReject --> |Reject| node_Reject@{ shape: rounded, label: "Reject file flowchart: ??" }

@@ -3,7 +3,7 @@ The AA-SI is developing a data pipeline to store, process, and analyze data, and
 
 Our data road map is based on echoPype's data processing levels <a href="https://echolevels.readthedocs.io/en/latest/levels_proposed.html"> "echoPype processing levels"</a>, where each level represents a step from "raw" data in manufacturer-specified file formats to gridded data that are ready for input to advanced analytical models, such as, machine learning (ML), artificial intelligence (AI), Bayesian inverse (APES), and other advanced statistical models. Active-acoustic data (echosounder, SONAR, multibeam) are our primary data set, but we include supplemental data, such as oceanographic, biological, and geological data that characterize the environment, as well as metadata for all data streams.
 
-For the AA-SI, we define the levels as:  
+For active acoustic data, we define the levels and processes within those levels as:  
 - **Level 0**
     - Input: raw data file in manufacturer-specified format located in the cloud or on-premise,
     - Harvest survey-level metadata (who, what, when, where, why, and how) for the selected data,
@@ -13,13 +13,17 @@ For the AA-SI, we define the levels as:
     - Output: survey-level and file-level metadata.
 - **Level 1**
     - Input: Level 0 data - raw data file, survey-level, and file-level metadata,
-    - Apply quality assurance (QA)/quality control (QC) criteria,
+    - Apply quality assurance (QA)/quality control (QC) criteria, e.g.,
+        - time-coordinate corrections
+        - notification of missing data
     - Harvest all ancillary data (e.g., motion, GPS, sound speed, attenuation, ...) recorded within the level 0 raw data file,
     - Determine whether supplemental data are required (e.g., missing GPS), and if so, assemble those data,
-    - Reformat manufacturer-specified-format active-acoustic data to open-format (<a href="https://htmlpreview.github.io/?https://github.com/ices-publications/SONAR-netCDF4/blob/master/Formatted_docs/crr341.html"> "ICES SONAR-netCDF4"</a>) format,
+    - Reformat manufacturer-specified-format active-acoustic data to "Echopype" or <a href="https://htmlpreview.github.io/?https://github.com/ices-publications/SONAR-netCDF4/blob/master/Formatted_docs/crr341.html"> "ICES SONAR-netCDF4"</a> open formats,
     - Reformat supplemental data to open-format, 
     - Collate validated calibration data and metadata for supplemental data,
-    - Output: Data files in SONAR-netCDF4 and Echopype open-formats for active-acoustic data, and supplemental data and metadata to be used for processing the active-acoustic data.
+    - Output: Data files in Echopype open-format for active-acoustic data, and supplemental data and metadata to be used for processing the active-acoustic data.
+        - The default is Echopype format, which we use as input to L2 and higher.
+        - We also provide data in strict sonarNET-CDF4 format as output to L1.  
 - **Level 2**
     - Input: Level 1 data - files in Echopype format - i.e, with volume and point-backscatter in Python (<a href="https://docs.xarray.dev/en/stable/"> "Xarray"</a>) format,
     - Apply missing ancillary data (e.g., missing GPS),
@@ -27,7 +31,6 @@ For the AA-SI, we define the levels as:
     - Apply validated calibration data,
     - Apply noise-reduction (impulse, transient, background noise) algorithms,
     - Apply noise-reduction lines and regions - e.g., bubble exclusion, seabed echo exclusion, instrument exclusion (e.g., CTD echo),
-    - Format active-acoustic data to echoPype, <a href="https://xarray.dev/"> "xArray"</a> based, format, 
     - Output: Calibration-verified, noise-reduced active-acoustic data in echoPype format at native resolution
 - **Level 3**
     - Input: Level 2 data,

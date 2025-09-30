@@ -13,12 +13,13 @@ For active acoustic data, we define the levels and processes within those levels
     - **Output**: survey-level and file-level metadata.
 - **Level 1**
     - **Input**: Level 0 data - raw data file, survey-level, and file-level metadata,</br>
-        1. Harvest supplemental data (e.g., motion, GPS, sound speed, attenuation, ...) recorded within the level 0 raw data file,</br>
-        1. Determine whether GPS data are recorded in the raw data file,</br>
+        1. Determine whether sufficient GPS data are recorded in the raw data file,</br>
+            - **"Sufficient" needs to be quantified.** Maybe a ratio of missing GPS to the ping interval would provide an indication if interpolation may be useful.</br>
             - If GPS data are not recorded:</br>
                 - Determine whether supplemental GPS data are available,</br>
                 - Inform the user that the file is not useable if no supplemental GPS data are available.</br>
             - Continue if GPS data are recorded.</br>
+        1. Harvest supplemental data (e.g., motion, GPS, sound speed, attenuation, ...) recorded within the level 0 raw data file,</br>
         1. Apply quality assurance (QA)/quality control (QC) criteria,</br>
             - Determine whether required GPS data are missing,</br>
             - Apply time-coordinate corrections,</br>

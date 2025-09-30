@@ -4,13 +4,13 @@ The AA-SI is developing a data pipeline to store, process, and analyze data, and
 Our data road map is based on echoPype's data processing levels <a href="https://echolevels.readthedocs.io/en/latest/levels_proposed.html"> "echoPype processing levels"</a>, where each level represents a step from "raw" data in manufacturer-specified file formats to gridded data that are ready for input to advanced analytical models, such as, machine learning (ML), artificial intelligence (AI), Bayesian inverse (APES), and other advanced statistical models. Active-acoustic data (echosounder, SONAR, multibeam) are our primary data set, but we include supplemental data, such as oceanographic, biological, and geological data that characterize the environment, as well as metadata for all data streams.
 
 For active acoustic data, we define the levels and processes within those levels as:  
-- **Level 0**
-    - Input: raw data file in manufacturer-specified format located in the cloud or on-premise,
-    - Harvest survey-level metadata (who, what, when, where, why, and how) for the selected data,
-    - Determine the echosounder manufacturer - this is the first step towards determining the file format,
-    - Determine the acquistion hardware and software used to record the data - this determines the file format,
-    - Harvest file-level metadata (CW or FM mode, number of channels, ...),
-    - Output: survey-level and file-level metadata.
+- **Level 0**  
+    - **Input**: raw data file in manufacturer-specified format located in the cloud or on-premise,</br>
+        1\. Harvest survey-level metadata (who, what, when, where, why, and how) for the selected data,</br>
+        2\. Determine the echosounder manufacturer - this is the first step towards determining the file format,</br>
+        3\. Determine the acquistion hardware and software used to record the data - this determines the file format,</br>
+        4\. Harvest file-level metadata (CW or FM mode, number of channels, ...) - this confirms that the file is readable.</br>
+    - **Output**: survey-level and file-level metadata.
 - **Level 1**
     - Input: Level 0 data - raw data file, survey-level, and file-level metadata,
     - Harvest all ancillary data (e.g., motion, GPS, sound speed, attenuation, ...) recorded within the level 0 raw data file,
@@ -55,8 +55,8 @@ flowchart TB
         node_RF@{ shape: rounded, label: "Raw File" } --> node_SMD@{ shape: database, label: <a href="https://github.com/nmfs-ost/AA-SI_metadata"> "Survey Metadata"</a> }
     end
     subgraph SG_ESManufacturer["**Echosounder Manufacturer**"]
-        direction LR
-        node_AL1@{shape: tag-doc, label: "AA Library Function: link to instructions"} --> node_Man@{ shape: diamond, label: "Select Manufacturer" }
+        direction TB
+        node_AL1@{shape: tag-doc, label: "AA Library Function: link to instructions"} --> node_Man@{ shape: lean-r, label: "Manufacturer" }
         node_AL2@{shape: tag-doc, label: "EchoPype Function: link to instructions"} --> node_Man
     end
     subgraph SG_ESMetaData["**Data File Format \& Metadata**"]
@@ -74,12 +74,14 @@ flowchart TB
     SG_DataSource --> SG_SurveyMetaData
     SG_SurveyMetaData --> SG_ESManufacturer
     SG_ESManufacturer --> SG_ESMetaData
-    SG_ESMetaData --> SG_L0Data
+    SG_ESMetaData --> node_AcceptReject@{ shape: diamond, label: "Accept or Reject File" }
+    node_AcceptReject --> |Accept| SG_L0Data
+    node_AcceptReject --> |Reject| node_Reject@{ shape: rounded, label: "Reject file flowchart: ??" }
 ```
 
-Level 0 data are survey-level and file-level metadata and the raw data file.
+Level 0 data are survey-level and file-level metadata and the raw data files.
 
-# Level 1 Data
+## Level 1 Data
 ```mermaid
 flowchart TB
     subgraph SG_L0Data["**Level 0 Data**"]
@@ -98,7 +100,7 @@ flowchart TB
     end
 SG_L0Data --> node_QAQC@{ shape: rounded, label: "Apply QA/QC algorithms<br/>&bull; link to required supplemental data<br/>&bull; link to time correction<br/>&bull; link to missing data check<br/>&bull; etc..." }
 style node_QAQC text-align:left
-node_QAQC --> node_AcceptReject@{ shape: diamond, label: "Accept or Reject File" }
+node_QAQC --> node_AcceptReject
 node_AcceptReject --> |Accept| SG_AcceptFile
 node_AcceptReject --> |Reject| node_Reject@{ shape: rounded, label: "Reject file flowchart: ??" }
 

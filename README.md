@@ -42,6 +42,12 @@ For active acoustic data, we define the levels and processes within those levels
 
 ## Level 0 Data
 ```mermaid
+---
+config:
+    flowchart:
+        subGraphTitleMargin:
+            "bottom": 30
+---
 flowchart TB
     subgraph SG_DataSource["**Raw Data Source**"]
         direction TB
@@ -49,6 +55,7 @@ flowchart TB
         node_SrcNCEI@{shape: lean-r, label: "NCEI"} --> node_NCEI@{ shape: tag-doc, label: "Retrieve Data from NCEI: link to instructions" }
         node_SrcGCP@{shape: lean-r, label: "GCP Prod Storage"} --> node_GCP@{ shape: tag-doc, label: "Retrieve Data from GCP: link to instructions" }
         node_SrcOP@{shape: lean-r, label: "On-Prem Storage"} --> node_OP@{ shape: tag-doc, label: "Retrieve Data from On-prem: link to instructions" }
+        %%style node_SrcOMAO color:blue
     end
     subgraph SG_SurveyMetaData["**Survey Metadata**"]
         direction LR

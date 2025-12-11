@@ -1,32 +1,38 @@
 # AA-SI Data Road Map
 The AA-SI is developing a data pipeline to store, process, and analyze data, and generate products for fisheries management. By necessity, this pipeline will be in the AA-SI's storage and computing environment  with GCP. One of the goals of this pipeline is to automate as much as we can so that we can effectively and efficiently address the growing data volume that we record and store.  
 
-Our data road map is based on echoPype's data processing levels <a href="https://echolevels.readthedocs.io/en/latest/levels_proposed.html"> "echoPype processing levels"</a>, where each level represents a step from "raw" data in manufacturer-specified file formats to gridded data that are ready for input to advanced analytical models, such as, machine learning (ML), artificial intelligence (AI), Bayesian inverse (APES), and other advanced statistical models. Active-acoustic data (echosounder, SONAR, multibeam) are our primary data set, but we include supplemental data, such as oceanographic, biological, and geological data that characterize the environment, as well as metadata for all data streams.
+Our data road map is based on echoPype's data processing levels <a href="https://echolevels.readthedocs.io/en/latest/levels_proposed.html"> "echoPype processing levels"</a>, where each level represents a step from "raw" data in manufacturer-specified file formats to gridded data that are ready for input to advanced analytical models, such as, machine learning (ML), artificial intelligence (AI), Bayesian inverse (APES), and other advanced statistical models. Active-acoustic data (e.g., echosounder, SONAR, multibeam) are our primary data set, but we include supplemental data, such as oceanographic, biological, and geological data that characterize the environment, as well as metadata for all data streams.
 
 For active acoustic data, we define the levels and processes within those levels as:  
 - **Level 0**  
-    - **Input**: raw data file in manufacturer-specified format located in the cloud or on-premise,</br>
-        1\. Harvest survey-level metadata (who, what, when, where, why, and how) for the selected data,</br>
-        2\. Determine the echosounder manufacturer - this is the first step towards determining the file format,</br>
-        3\. Determine the acquistion hardware and software used to record the data - this determines the file format,</br>
-        4\. Harvest file-level metadata (CW or FM mode, number of channels, ...) - this confirms that the file is readable.</br>
-    - **Output**: survey-level and file-level metadata.
+    **Input**: raw data file in manufacturer-specified format located in the cloud or on-premise</br>
+    **Processes**:</br>
+    - Harvest survey-level metadata (who, what, when, where, why, and how) for the selected data,</br>
+    - Determine the echosounder manufacturer - this is the first step towards determining the file format,</br>
+    - Determine the acquistion hardware and software used to record the data - this determines the file format,</br>
+    - Harvest file-level metadata (CW or FM mode, number of channels, ...) - this confirms that the file is readable.</br>
+    **Output**:</br>
+        - survey-level metadata
+        - file-level metadata.
 - **Level 1**
-    - **Input**: Level 0 data - raw data file, survey-level, and file-level metadata,</br>
-        1. Determine whether sufficient GPS data are recorded in the raw data file,</br>
+    - **Input**: Level 0 data</br>
+      - raw data file
+      - survey-level metadata
+      - file-level metadata</br>
+   1\. Determine whether sufficient GPS data are recorded in the raw data file,</br>
             - **"Sufficient" needs to be quantified.** Maybe a ratio of missing GPS to the ping interval would provide an indication if interpolation may be useful.</br>
             - If GPS data are not recorded:</br>
                 - Determine whether supplemental GPS data are available,</br>
                 - Inform the user that the file is not useable if no supplemental GPS data are available.</br>
             - Continue if GPS data are recorded.</br>
-        1. Harvest supplemental data (e.g., motion, GPS, sound speed, attenuation, ...) recorded within the level 0 raw data file,</br>
-        1. Apply quality assurance (QA)/quality control (QC) criteria,</br>
+    1. Harvest supplemental data (e.g., motion, GPS, sound speed, attenuation, ...) recorded within the level 0 raw data file,</br>
+    1. Apply quality assurance (QA)/quality control (QC) criteria,</br>
             - Determine whether required GPS data are missing,</br>
             - Apply time-coordinate corrections,</br>
             - Other QA/QC?</br>
-        1. Continue if the file passes QA/QC</br>
-        1. Reformat manufacturer-specified-format active-acoustic data to "Echopype" or <a href="https://htmlpreview.github.io/?https://github.com/ices-publications/SONAR-netCDF4/blob/master/Formatted_docs/crr341.html"> "ICES SONAR-netCDF4"</a> open formats,</br>
-        1. Collate calibration data and metadata for supplemental data,</br>
+    1. Continue if the file passes QA/QC</br>
+    1. Reformat manufacturer-specified-format active-acoustic data to "Echopype" or <a href="https://htmlpreview.github.io/?https://github.com/ices-publications/SONAR-netCDF4/blob/master/Formatted_docs/crr341.html"> "ICES SONAR-netCDF4"</a> open formats,</br>
+    1. Collate calibration data and metadata for supplemental data,</br>
     - **Output**: Data files in Echopype open-format for active-acoustic data, and supplemental data and metadata to be used for processing the active-acoustic data.</br>
         - The default is Echopype format, which we use as input to L2 and higher.</br>
         - We also provide data in strict sonarNET-CDF4 format as output to L1.</br>

@@ -5,15 +5,15 @@ Our data road map is based on echoPype's data processing levels <a href="https:/
 
 For active acoustic data, we define the levels and processes within those levels as:  
 - **Level 0**  
-    **Input**: raw data file in manufacturer-specified format located in the cloud or on-premise</br>
-    **Processes**:</br>
-    - Harvest survey-level metadata (who, what, when, where, why, and how) for the selected data,</br>
-    - Determine the echosounder manufacturer - this is the first step towards determining the file format,</br>
-    - Determine the acquistion hardware and software used to record the data - this determines the file format,</br>
-    - Harvest file-level metadata (CW or FM mode, number of channels, ...) - this confirms that the file is readable.</br>
-    **Output**:</br>
-        - survey-level metadata
-        - file-level metadata.
+    - **Input**: raw data file in manufacturer-specified format located in the cloud or on-premise</br>
+    - **Processes**:</br>
+      - Harvest survey-level metadata (who, what, when, where, why, and how) for the selected data,</br>
+      - Determine the echosounder manufacturer - this is the first step towards determining the file format,</br>
+      - Determine the acquistion hardware and software used to record the data - this determines the file format,</br>
+      - Harvest file-level metadata (CW or FM mode, number of channels, ...) - this confirms that the file is readable.</br>
+    - **Output**:
+      - survey-level metadata
+      - file-level metadata.
 - **Level 1**
     - **Input**: Level 0 data</br>
       - raw data file

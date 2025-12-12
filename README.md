@@ -15,27 +15,29 @@ For active acoustic data, we define the levels and processes within those levels
       - survey-level metadata
       - file-level metadata.
 - **Level 1**
-    - **Input**: Level 0 data</br>
+    - **Input**: Data from Level 0</br>
       - raw data file
       - survey-level metadata
       - file-level metadata</br>
-   1\. Determine whether sufficient GPS data are recorded in the raw data file,</br>
-            - **"Sufficient" needs to be quantified.** Maybe a ratio of missing GPS to the ping interval would provide an indication if interpolation may be useful.</br>
-            - If GPS data are not recorded:</br>
-                - Determine whether supplemental GPS data are available,</br>
-                - Inform the user that the file is not useable if no supplemental GPS data are available.</br>
-            - Continue if GPS data are recorded.</br>
-    1. Harvest supplemental data (e.g., motion, GPS, sound speed, attenuation, ...) recorded within the level 0 raw data file,</br>
-    1. Apply quality assurance (QA)/quality control (QC) criteria,</br>
-            - Determine whether required GPS data are missing,</br>
-            - Apply time-coordinate corrections,</br>
-            - Other QA/QC?</br>
-    1. Continue if the file passes QA/QC</br>
-    1. Reformat manufacturer-specified-format active-acoustic data to "Echopype" or <a href="https://htmlpreview.github.io/?https://github.com/ices-publications/SONAR-netCDF4/blob/master/Formatted_docs/crr341.html"> "ICES SONAR-netCDF4"</a> open formats,</br>
-    1. Collate calibration data and metadata for supplemental data,</br>
+    - **Level 1A**
+      - **Processes**:</br>
+        1. Determine whether sufficient GPS data are recorded in the raw data file,</br>
+              - **"Sufficient" needs to be quantified.** Maybe a ratio of missing GPS to the ping interval would provide an indication if interpolation may be useful.</br>
+              - If GPS data are not recorded:</br>
+                  - Determine whether supplemental GPS data are available,</br>
+                  - Inform the user that the file is not useable if no supplemental GPS data are available.</br>
+              - Continue if GPS data are recorded.</br>
+        1. Harvest supplemental data (e.g., motion, GPS, sound speed, attenuation, ...) recorded within the level 0 raw data file,</br>
+        1. Apply quality assurance (QA)/quality control (QC) criteria,</br>
+              - Determine whether required GPS data are missing,</br>
+              - Apply time-coordinate corrections,</br>
+              - Other QA/QC?</br>
+        1. Continue if the file passes QA/QC</br>
+        1. Reformat manufacturer-specified-format active-acoustic data to "Echopype" or <a href="https://htmlpreview.github.io/?https://github.com/ices-publications/SONAR-netCDF4/blob/master/Formatted_docs/crr341.html"> "ICES SONAR-netCDF4"</a> open formats,</br>
+        1. Collate calibration data and metadata for supplemental data,</br>
     - **Output**: Data files in Echopype open-format for active-acoustic data, and supplemental data and metadata to be used for processing the active-acoustic data.</br>
-        - The default is Echopype format, which we use as input to L2 and higher.</br>
-        - We also provide data in strict sonarNET-CDF4 format as output to L1.</br>
+      - The default is Echopype format, which we use as input to L2 and higher.</br>
+      - We also provide data in strict sonarNET-CDF4 format as output to L1.</br>
 - **Level 2**
     - Input: Level 1 data - files in Echopype format - i.e, with volume and point-backscatter in Python (<a href="https://docs.xarray.dev/en/stable/"> "Xarray"</a>) format,
     - Apply missing ancillary data (e.g., missing GPS),

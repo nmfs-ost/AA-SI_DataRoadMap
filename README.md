@@ -128,10 +128,10 @@ config:
 flowchart TB
     subgraph SG_L1_InputData["**Level 0 Data Input**"]
         direction TB
-        node_L0_RD@{ shape: rounded, label: "Raw File" }
-        node_L0_SMD@{ shape: database, label: "Survey Metadata" }
-        node_L0_FMD@{ shape: database, label: "File-level Metadata" }
-        node_L0_PMD@{ shape: database, label: "Ping-level Metadata" }
+        node_L1_RD@{ shape: rounded, label: "Raw File" }
+        node_L1_SMD@{ shape: database, label: "Survey Metadata" }
+        node_L1_FMD@{ shape: database, label: "File-level Metadata" }
+        node_L1_PMD@{ shape: database, label: "Ping-level Metadata" }
     end
     subgraph SG_L1A_GPS["**Level 1A - GPS**"]
         direction TB
@@ -154,17 +154,13 @@ flowchart TB
         node_L1B_Motion@{ shape: rounded, label: "Apply Motion Correction" } 
     end
     subgraph SG_L1B_OS["**Open-Source File Format**"]
-        direction TB
-        node_L1B_EP@{ shape: database, label: "echoPype Format"}
-        node_L1B_sonarNet@{ database: rounded, label: "sonarNET-CDF4 Format"}
-    end
-    subgraph SG_L1A_AcceptFile["**QA/QC Accepted**"]
-        direction TB
-        node_L1B_RF1@{ shape: rounded, label: "Raw File" }
-        node_RFSD@{ shape: database, label: "Supplemental Data" }
-        node_EPF@{ shape: rounded, label: "Echopype File" }
-        %%node_L0RF1 --> node_EPF
-        %%node_RFSD --> node_EPF
+        direction LR
+        node_L1B_EP@{ shape: rounded, label: "echoPype Format"}
+        node_L1B_sonarNet@{ shape: rounded, label: "sonarNET-CDF4 Format"}
+        node_L1B_suppdata@{ shape: rounded, label: "Supplemental Data"}
+        node_L1B_SMD@{ shape: database, label: "Survey Metadata" }
+        node_L1B_FMD@{ shape: database, label: "File-level Metadata" }
+        node_L1B_PMD@{ shape: database, label: "Ping-level Metadata" }
     end
 SG_L1_InputData --> SG_L1A_GPS
 SG_L1A_GPS --> |Accept| SG_L1A_MD
@@ -177,4 +173,39 @@ SG_L1B_Motion --> |Reject| node_Reject_L1B@{ shape: rounded, label: "Reject: Una
 
 
 ```
-Level 1 data are the Echopype netCDF4 data file, supplemental data files and metadata.
+Level 1 data are the Echopype netCDF4 data file, supplemental data files, and metadata.  
+
+## Level 2 Data
+```mermaid
+---
+config:
+    flowchart:
+        subGraphTitleMargin:
+            "bottom": 30
+---
+flowchart TB
+    subgraph SG_L2_InputData["**Level 1 Data Input**"]
+        direction TB
+        node_L2_RD@{ shape: rounded, label: "echoPype File" }
+        node_L2_SMD@{ shape: database, label: "Survey Metadata" }
+        node_L2_FMD@{ shape: database, label: "File-level Metadata" }
+        node_L2_PMD@{ shape: database, label: "Ping-level Metadata" }
+        node_L2_Cal@{ shape: rounded, label: "Calibration Data" }
+    end
+    subgraph SG_L2A_Cal["**Level 2A - Calibration**"]
+        direction TB
+        node_L2A_Cal@{ shape: rounded, label: "Apply Calibration" } --> node_L2A_CalOK@{ shape: tag-doc, label: "Calibration QA/QC" }
+    end
+    subgraph SG_L2B_Exclusion["**Level 2B - Exclusion Regions**"]
+        direction TB
+        node_L2B_Exclusion@{ shape: rounded, label: "Remove Exclusion Regions" } --> node_L2B_ExOK@{ shape: tag-doc, label: "Exclusion Regions QA/QC" }
+    end
+
+SG_L2_InputData --> SG_L2A_Cal
+SG_L2A_Cal --> |Accept| SG_L2B_Exclusion
+SG_L2A_Cal --> |Reject| node_Reject_L2A@{ shape: rounded, label: "Reject: Unacceptable Calibration: ??" }
+
+```
+Level 2 data are calibrated data in Echopype netCDF4 format, supplemental data files, and metadata.  
+SG_L1B_Motion --> |Accept| SG_L1B_OS
+SG_L1B_Motion --> |Reject| node_Reject_L1B@{ shape: rounded, label: "Reject: Unacceptable Data Format: ??" }

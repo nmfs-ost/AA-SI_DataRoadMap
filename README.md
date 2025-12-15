@@ -7,6 +7,7 @@ For active acoustic data, we define the levels and processes within those levels
 - **Level 0**  
     - **Input:** raw data file in manufacturer-specified format located in the cloud or on-premise</br>
     - **Processes:** </br>
+      - Retrieve data from source (e.g., NCEI, GCP, on-prem, OMAO), </br>
       - Harvest survey-level metadata (who, what, when, where, why, and how) for the selected data,</br>
       - Determine the echosounder manufacturer,</br>
       - Determine the acquistion hardware and software used to record the data,</br>

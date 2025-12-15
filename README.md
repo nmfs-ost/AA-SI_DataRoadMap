@@ -15,7 +15,7 @@ For active acoustic data, we define the levels and processes within those levels
     - **Output:** </br>
       - survey-level metadata</br>
       - file-level metadata</br>
-      - ping-level metadata</br>
+      - ping-level metadata</br></br>
 - **Level 1**</br>
     - **Input:** Data from Level 0</br>
       - raw data file</br>
@@ -37,7 +37,7 @@ For active acoustic data, we define the levels and processes within those levels
     - **Output:** Data files in open-source formats</br>
       - The default is Echopype format, which we use as input to L2 and higher. </br>
       - Strict sonarNET-CDF4 format for coordination with other national and international groups.</br>
-      - Supplemental data and metadata to be used for processing the active-acoustic data. </br>
+      - Supplemental data and metadata to be used for processing the active-acoustic data. </br></br>
 - **Level 2** </br>
     - **Input:** </br>
       - Level 1B data - files in Echopype format (volume and point-backscatter in (<a href="https://docs.xarray.dev/en/stable/"> "Xarray"</a>) format), </br>
@@ -51,12 +51,19 @@ For active acoustic data, we define the levels and processes within those levels
         - Apply noise-reduction (impulse, transient, background noise) algorithms, </br>
         - Apply noise-reduction lines and regions - e.g., bubble exclusion, seabed echo exclusion, instrument exclusion (e.g., CTD echo), </br>
     - **Output:** </br>
-      - Calibration-verified, noise-reduced active-acoustic data in echoPype (<a href="https://docs.xarray.dev/en/stable/"> "Xarray"</a>) format) at native resolution </br>
-- **Level 3**
-    - Input: Level 2 data,
-    - Grid the active-acoustic data at the selected spatial and/or temporal grid resolution,
-    - Provide validated data at the equivalent grid resolution,
-    - Output: Data ready for ingest to advanced AI/ML and analytical models
+      - Calibration-verified, noise-reduced active-acoustic data in echoPype (<a href="https://docs.xarray.dev/en/stable/"> "Xarray"</a>) format) at native resolution </br></br>
+- **Level 3** </br>
+  - **Input:** </br>
+    - Level 2B data: calibrated, noise-reduced data</br>
+  - **Level 3A** </br>
+    - **Processes:** </br>
+      - Grid the data at the selected spatial and/or temporal grid resolution, </br>
+      - Provide validated data at the equivalent grid resolution, </br>
+  - **Level 3B** </br>
+    - **Processes:** </br>
+      - Apply QA/QC criteria </br>  
+  - **Output:** </br>
+    - Data ready for ingest to advanced AI/ML and analytical models </br></br>
 - **Level 4**
     - TBD - AI/ML models
 

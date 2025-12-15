@@ -112,13 +112,19 @@ flowchart TB
     SG_L0_ESManufacturer --> SG_L0_ESMetaData
     SG_L0_ESMetaData --> node_AcceptReject@{ shape: diamond, label: "Accept or Reject File" }
     node_AcceptReject --> |Accept| SG_L0_Data
-    node_AcceptReject --> |Reject| node_Reject@{ shape: rounded, label: "Reject file flowchart: ??" }
+    node_AcceptReject --> |Reject| node_Reject_L0@{ shape: rounded, label: "Reject: Unacceptable L0 Data: ??" }
 ```
 
 Level 0 data are survey-level, file-level, and ping-level metadata and the raw data files.
 
 ## Level 1 Data
 ```mermaid
+---
+config:
+    flowchart:
+        subGraphTitleMargin:
+            "bottom": 30
+---
 flowchart TB
     subgraph SG_L1_InputData["**Level 0 Data Input**"]
         direction TB
@@ -147,6 +153,11 @@ flowchart TB
         direction TB
         node_L1B_Motion@{ shape: rounded, label: "Apply Motion Correction" } 
     end
+    subgraph SG_L1B_OS["**Open-Source File Format**"]
+        direction TB
+        node_L1B_EP@{ shape: database, label: "echoPype Format"}
+        node_L1B_sonarNet@{ database: rounded, label: "sonarNET-CDF4 Format"}
+    end
     subgraph SG_L1A_AcceptFile["**QA/QC Accepted**"]
         direction TB
         node_L1B_RF1@{ shape: rounded, label: "Raw File" }
@@ -157,14 +168,12 @@ flowchart TB
     end
 SG_L1_InputData --> SG_L1A_GPS
 SG_L1A_GPS --> |Accept| SG_L1A_MD
-SG_L1A_GPS --> |Reject| node_Reject@{ shape: rounded, label: "Reject file flowchart: ??" }
+SG_L1A_GPS --> |Reject| node_Reject_L1A_GPS@{ shape: rounded, label: "Reject: Unacceptable GPS: ??" }
 SG_L1A_MD --> SG_L1B_MergeGPS
 SG_L1B_MergeGPS --> SG_L1B_TimeCorr
 SG_L1B_TimeCorr --> SG_L1B_Motion
-%%SG_L1A_GPSnode_AcceptReject --> |Accept| SG_L1AMD
-%%SG_L0Data --> node_QAQC@{ shape: rounded, label: "Apply QA/QC algorithms<br/>&bull; link to required supplemental data<br/>&bull; link to time correction<br/>&bull; link to missing data check<br/>&bull; etc..." }
-%%style node_QAQC text-align:left
-%%node_QAQC --> node_AcceptReject
+SG_L1B_Motion --> |Accept| SG_L1B_OS
+SG_L1B_Motion --> |Reject| node_Reject_L1B@{ shape: rounded, label: "Reject: Unacceptable Data Format: ??" }
 
 
 ```

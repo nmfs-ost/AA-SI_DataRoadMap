@@ -135,7 +135,7 @@ flowchart TB
     end
     subgraph SG_L1A_GPS["**Level 1A - GPS**"]
         direction TB
-        node_L1A_GPS@{ shape: rounded, label: "GPS Acceptable" } --> node_L1A_GPSOK@{ shape: tag-doc, label: "GPS QA/QC" }
+        node_L1A_GPS@{ shape: tag-doc, label: "GPS QA/QC" }
     end
     subgraph SG_L1A_MD["**Level 1A - Supplemental Metadata**"]
         direction TB
@@ -186,15 +186,15 @@ config:
 flowchart TB
     subgraph SG_L2_InputData["**Level 1 Data Input**"]
         direction TB
-        node_L2_RD@{ shape: rounded, label: "echoPype File" }
+        node_L2_RD@{ shape: rounded, label: "Data in echoPype Format" }
         node_L2_SMD@{ shape: database, label: "Survey Metadata" }
         node_L2_FMD@{ shape: database, label: "File-level Metadata" }
         node_L2_PMD@{ shape: database, label: "Ping-level Metadata" }
         node_L2_Cal@{ shape: rounded, label: "Calibration Data" }
     end
-    subgraph SG_L2A_Cal["**Level 2A - Calibration**"]
+    subgraph SG_L2A_Cal["**Level 2A - Apply Calibration**"]
         direction TB
-        node_L2A_Cal@{ shape: rounded, label: "Apply Calibration" } --> node_L2A_CalOK@{ shape: tag-doc, label: "Calibration QA/QC" }
+        node_L2A_Cal@{ shape: tag-doc, label: "Calibration QA/QC" }
     end
     subgraph SG_L2B_Exclusion["**Level 2B - Exclusion Regions**"]
         direction TB
@@ -207,5 +207,48 @@ SG_L2A_Cal --> |Reject| node_Reject_L2A@{ shape: rounded, label: "Reject: Unacce
 
 ```
 Level 2 data are calibrated data in Echopype netCDF4 format, supplemental data files, and metadata.  
-SG_L1B_Motion --> |Accept| SG_L1B_OS
-SG_L1B_Motion --> |Reject| node_Reject_L1B@{ shape: rounded, label: "Reject: Unacceptable Data Format: ??" }
+
+## Level 3 Data
+```mermaid
+---
+config:
+    flowchart:
+        subGraphTitleMargin:
+            "bottom": 30
+---
+flowchart TB
+    subgraph SG_L3_InputData["**Level 2 Data Input**"]
+        direction TB
+        node_L3_RD@{ shape: rounded, label: "Calibrated, noise reduced echoPype Data" }
+        node_L3_SMD@{ shape: database, label: "Survey Metadata" }
+        node_L3_FMD@{ shape: database, label: "File-level Metadata" }
+        node_L3_PMD@{ shape: database, label: "Ping-level Metadata" }
+    end
+    subgraph SG_L3A_Grid["**Level 3A - Apply Gridding**"]
+        direction TB
+        node_L3A_Grid@{ shape: tag-doc, label: "Apply Spatiotemporal Grid" }
+    end
+    subgraph SG_L3A_ValData["**Level 3A - Grid Validated Data**"]
+        direction TB
+        node_L3A_ValData@{ shape: tag-doc, label: "Grid Validated Data" }
+    end
+    subgraph SG_L3B_QAQC["**Level 3B - Apply Final QA/QC Criteria**"]
+        direction TB
+        node_L3B_QAQC@{ shape: rounded, label: "Apply Final QA/QC" }
+    end
+    subgraph SG_L3B_Output["**Level 3B Output**"]
+        direction TB
+        node_L3B_RD@{ shape: rounded, label: "Gridded, calibrated, noise reduced echoPype Data" }
+        node_L3B_SMD@{ shape: database, label: "Survey Metadata" }
+        node_L3B_FMD@{ shape: database, label: "File-level Metadata" }
+        node_L3B_PMD@{ shape: database, label: "Ping-level Metadata" }
+    end
+SG_L3_InputData --> SG_L3A_Grid
+SG_L3A_Grid --> |Accept| SG_L3A_ValData
+SG_L3A_Grid --> |Reject| node_Reject_L3A@{ shape: rounded, label: "Reject: Unacceptable Grid: ??" }
+SG_L3A_ValData --> SG_L3B_QAQC
+SG_L3B_QAQC --> |Accept| SG_L3B_Output
+SG_L3B_QAQC --> |Reject| node_Reject_L3B@{ shape: rounded, label: "Reject: Unacceptable Data: ??" }
+
+```
+Level 3 data are ready for ingest to advanced AI/ML and analytical models

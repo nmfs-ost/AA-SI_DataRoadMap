@@ -5,19 +5,19 @@ Our data road map is based on echoPype's data processing levels <a href="https:/
 
 For active acoustic data, we define the levels and processes within those levels as:  
 - **Level 0**  
-    - **Input**: raw data file in manufacturer-specified format located in the cloud or on-premise</br>
-    - **Processes**:</br>
+    - **Input:** raw data file in manufacturer-specified format located in the cloud or on-premise</br>
+    - **Processes:** </br>
       - Harvest survey-level metadata (who, what, when, where, why, and how) for the selected data,</br>
       - Determine the echosounder manufacturer,</br>
       - Determine the acquistion hardware and software used to record the data,</br>
       - Harvest file-level metadata (e.g., number of channels, ...).</br>
       - Harvest ping-level metadata (e.g., CW or FM, active or passive, ...)</br>
-    - **Output**:</br>
+    - **Output:** </br>
       - survey-level metadata</br>
       - file-level metadata</br>
       - ping-level metadata</br>
 - **Level 1**</br>
-    - **Input**: Data from Level 0</br>
+    - **Input:** Data from Level 0</br>
       - raw data file</br>
       - survey-level metadata</br>
       - file-level metadata</br>
@@ -31,20 +31,27 @@ For active acoustic data, we define the levels and processes within those levels
         - Apply quality assurance (QA)/quality control (QC) criteria,</br>
           - Merge supplemental data if needed (e.g., GPS),</br>
           - Apply time-coordinate corrections,</br>
+          - Apply motion correction,</br>
           - Other QA/QC?</br>
-        - Reformat manufacturer-specified-format active-acoustic data to "Echopype" or <a href="https://htmlpreview.github.io/?https://github.com/ices-publications/SONAR-netCDF4/blob/master/Formatted_docs/crr341.html"> "ICES SONAR-netCDF4"</a> open formats,</br>
-    - **Output**: Data files in open-source formats</br>
-      - The default is Echopype format, which we use as input to L2 and higher.</br>
-      - Strict sonarNET-CDF4 format as output to L1.</br>
-      - Supplemental data and metadata to be used for processing the active-acoustic data.
-- **Level 2**
-    - Input: Level 1 data - files in Echopype format - i.e, with volume and point-backscatter in Python (<a href="https://docs.xarray.dev/en/stable/"> "Xarray"</a>) format,
-    - Apply missing ancillary data (e.g., missing GPS),
-    - Apply motion, sound-speed, and attenuation corrections,
-    - Apply validated calibration data,
-    - Apply noise-reduction (impulse, transient, background noise) algorithms,
-    - Apply noise-reduction lines and regions - e.g., bubble exclusion, seabed echo exclusion, instrument exclusion (e.g., CTD echo),
-    - Output: Calibration-verified, noise-reduced active-acoustic data in echoPype format at native resolution
+        - Reformat manufacturer-specified-format active-acoustic data to "Echopype" and/or <a href="https://htmlpreview.github.io/?https://github.com/ices-publications/SONAR-netCDF4/blob/master/Formatted_docs/crr341.html"> "ICES SONAR-netCDF4"</a> open formats,</br>
+    - **Output:** Data files in open-source formats</br>
+      - The default is Echopype format, which we use as input to L2 and higher. </br>
+      - Strict sonarNET-CDF4 format for coordination with other national and international groups.</br>
+      - Supplemental data and metadata to be used for processing the active-acoustic data. </br>
+- **Level 2** </br>
+    - **Input:** </br>
+      - Level 1B data - files in Echopype format (volume and point-backscatter in (<a href="https://docs.xarray.dev/en/stable/"> "Xarray"</a>) format), </br>
+      - Supplemental data and metadata </br>
+      - Calibration data and metadata </br>
+    - **Level 2A** </br>
+      - **Processes:** </br>
+        - Apply validated calibration data, </br>
+    - **Level 2B** </br>
+      - **Processes:** </br>
+        - Apply noise-reduction (impulse, transient, background noise) algorithms, </br>
+        - Apply noise-reduction lines and regions - e.g., bubble exclusion, seabed echo exclusion, instrument exclusion (e.g., CTD echo), </br>
+    - **Output:** </br>
+      - Calibration-verified, noise-reduced active-acoustic data in echoPype (<a href="https://docs.xarray.dev/en/stable/"> "Xarray"</a>) format) at native resolution </br>
 - **Level 3**
     - Input: Level 2 data,
     - Grid the active-acoustic data at the selected spatial and/or temporal grid resolution,

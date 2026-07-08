@@ -26,7 +26,12 @@ For active acoustic data, we define the levels and processes within those levels
     - **Level 1A**</br>
       - **Processes**:</br>
         - Determine whether sufficient GPS data are recorded in the raw data file,</br>
-        - Harvest supplemental data (e.g., motion, GPS, sound speed, attenuation, ...) recorded within the level 0 raw data file,</br>
+        - Harvest supplemental data recorded within the level 0 raw data file,</br>
+          - motion data
+          - GPS
+          - sound speed
+          - attenuation
+          - transducer depth
     - **Level 1B**</br>
       - **Processes**:</br>
         - Apply quality assurance (QA)/quality control (QC) criteria,</br>

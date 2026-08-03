@@ -13,63 +13,63 @@ For active acoustic data, we define the levels and processes within those levels
       - Determine the acquistion hardware and software used to record the data,
       - Harvest file-level metadata (e.g., number of channels, ...).
       - Harvest ping-level metadata (e.g., CW or FM, active or passive, ...)
-    - **Output:** </br>
-      - survey-level metadata</br>
-      - file-level metadata</br>
-      - ping-level metadata</br></br>
-- **Level 1**</br>
-    - **Input:** Data from Level 0</br>
-      - raw data file</br>
-      - survey-level metadata</br>
-      - file-level metadata</br>
-      - ping-level metadata</br>
-    - **Level 1A**</br>
-      - **Processes**:</br>
-        - Determine whether sufficient GPS data are recorded in the raw data file,</br>
-        - Harvest supplemental data recorded within the level 0 raw data file,</br>
+    - **Output:** 
+      - survey-level metadata
+      - file-level metadata
+      - ping-level metadata
+- **Level 1**
+    - **Input:** Data from Level 0
+      - raw data file
+      - survey-level metadata
+      - file-level metadata
+      - ping-level metadata
+    - **Level 1A**
+      - **Processes**:
+        - Determine whether sufficient GPS data are recorded in the raw data file,
+        - Harvest supplemental data recorded within the level 0 raw data file,
           - motion data
           - GPS
           - sound speed
           - attenuation
           - transducer depth
-    - **Level 1B**</br>
-      - **Processes**:</br>
-        - Apply quality assurance (QA)/quality control (QC) criteria,</br>
-          - Merge supplemental data if needed (e.g., GPS),</br>
-          - Apply time-coordinate corrections,</br>
-          - Apply motion correction,</br>
-          - Other QA/QC?</br>
-        - Reformat manufacturer-specified-format active-acoustic data to "Echopype" and/or <a href="https://htmlpreview.github.io/?https://github.com/ices-publications/SONAR-netCDF4/blob/master/Formatted_docs/crr341.html"> "ICES SONAR-netCDF4"</a> open formats,</br>
-    - **Output:** Data files in open-source formats</br>
-      - The default is Echopype format, which we use as input to L2 and higher. </br>
-      - Strict sonarNET-CDF4 format for coordination with other national and international groups.</br>
-      - Supplemental data and metadata to be used for processing the active-acoustic data. </br></br>
-- **Level 2** </br>
-    - **Input:** </br>
-      - Level 1B data - files in Echopype format (volume and point-backscatter in (<a href="https://docs.xarray.dev/en/stable/"> "Xarray"</a>) format), </br>
-      - Supplemental data and metadata </br>
-      - Calibration data and metadata </br>
-    - **Level 2A** </br>
-      - **Processes:** </br>
-        - Apply validated calibration data, </br>
-    - **Level 2B** </br>
-      - **Processes:** </br>
-        - Apply noise-reduction (impulse, transient, background noise) algorithms, </br>
-        - Apply noise-reduction lines and regions - e.g., bubble exclusion, seabed echo exclusion, instrument exclusion (e.g., CTD echo), </br>
-    - **Output:** </br>
-      - Calibration-verified, noise-reduced active-acoustic data in echoPype (<a href="https://docs.xarray.dev/en/stable/"> "Xarray"</a>) format) at native resolution </br></br>
-- **Level 3** </br>
-  - **Input:** </br>
-    - Level 2B data: calibrated, noise-reduced data</br>
-  - **Level 3A** </br>
-    - **Processes:** </br>
-      - Grid the data at the selected spatial and/or temporal grid resolution, </br>
-      - Provide validated data at the equivalent grid resolution, </br>
-  - **Level 3B** </br>
-    - **Processes:** </br>
-      - Apply QA/QC criteria </br>  
-  - **Output:** </br>
-    - Data ready for ingest to advanced AI/ML and analytical models </br></br>
+    - **Level 1B**
+      - **Processes**:
+        - Apply quality assurance (QA)/quality control (QC) criteria,
+          - Merge supplemental data if needed (e.g., GPS),
+          - Apply time-coordinate corrections,
+          - Apply motion correction,
+          - Other QA/QC?
+        - Reformat manufacturer-specified-format active-acoustic data to "Echopype" and/or <a href="https://htmlpreview.github.io/?https://github.com/ices-publications/SONAR-netCDF4/blob/master/Formatted_docs/crr341.html"> "ICES SONAR-netCDF4"</a> open formats,
+    - **Output:** Data files in open-source formats
+      - The default is Echopype format, which we use as input to L2 and higher. 
+      - Strict sonarNET-CDF4 format for coordination with other national and international groups.
+      - Supplemental data and metadata to be used for processing the active-acoustic data. 
+- **Level 2** 
+    - **Input:** 
+      - Level 1B data - files in Echopype format (volume and point-backscatter in (<a href="https://docs.xarray.dev/en/stable/"> "Xarray"</a>) format), 
+      - Supplemental data and metadata 
+      - Calibration data and metadata 
+    - **Level 2A** 
+      - **Processes:** 
+        - Apply validated calibration data, 
+    - **Level 2B** 
+      - **Processes:** 
+        - Apply noise-reduction (impulse, transient, background noise) algorithms, 
+        - Apply noise-reduction lines and regions - e.g., bubble exclusion, seabed echo exclusion, instrument exclusion (e.g., CTD echo), 
+    - **Output:** 
+      - Calibration-verified, noise-reduced active-acoustic data in echoPype (<a href="https://docs.xarray.dev/en/stable/"> "Xarray"</a>) format) at native resolution 
+- **Level 3** 
+  - **Input:** 
+    - Level 2B data: calibrated, noise-reduced data
+  - **Level 3A** 
+    - **Processes:** 
+      - Grid the data at the selected spatial and/or temporal grid resolution, 
+      - Provide validated data at the equivalent grid resolution, 
+  - **Level 3B** 
+    - **Processes:** 
+      - Apply QA/QC criteria  
+  - **Output:** 
+    - Data ready for ingest to advanced AI/ML and analytical models 
 - **Level 4**
     - TBD - AI/ML models
 

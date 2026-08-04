@@ -105,7 +105,7 @@ flowchart TB
         node_L0_BS@{ shape: rounded, label: "BioSonics" } --> node_L0_BSMD@{ shape: tag-doc, label: "link to BioSonics data file format and metadata" }
         node_L0_ASL@{ shape: rounded, label: "ASL" } --> node_L0_ASLMD@{ shape: tag-doc, label: "link to ASL data file format and metadata" }
     end
-    subgraph SG_L0_Data["**Level 0 Data**"]
+    subgraph SG_L0_Data["**Level 0 Data & Provencance**"]
         direction TB
         node_L0_RD@{ shape: rounded, label: "Raw File" }
         node_L0_SMD@{ shape: database, label: "Survey Metadata" }
@@ -120,7 +120,7 @@ flowchart TB
     node_AcceptReject --> |Reject| node_Reject_L0@{ shape: rounded, label: "Reject: Unacceptable L0 Data: ??" }
 ```
 
-Level 0 data are survey-level, file-level, and ping-level metadata and the raw data files.
+Level 0 data are survey-level, file-level, and ping-level metadata (**data provenance**) and the raw data files.
 
 ## Level 1 Data
 ```mermaid
@@ -178,7 +178,7 @@ SG_L1B_Motion --> |Reject| node_Reject_L1B@{ shape: rounded, label: "Reject: Una
 
 
 ```
-Level 1 data are the Echopype netCDF4 data file, supplemental data files, and metadata.  
+Level 1 data are the Echopype netCDF4 data file, supplemental data files, and metadata (**data provenance**).  
 
 ## Level 2 Data
 ```mermaid

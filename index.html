@@ -14,7 +14,6 @@
 
   <style>
     body {
-      box-sizing: border-box;
       max-width: 1200px;
       margin: 0 auto;
       padding: 45px;
@@ -24,10 +23,6 @@
       body {
         padding: 15px;
       }
-    }
-
-    .markdown-body {
-      min-width: 200px;
     }
   </style>
 
@@ -39,65 +34,53 @@
     Loading...
   </article>
 
-  <!-- Load Markdown parser -->
-
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-
-  <!-- Load Mermaid -->
 
   <script type="module">
 
-    import mermaid from
-      'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+    import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs";
 
     mermaid.initialize({
       startOnLoad: false,
-      securityLevel: 'loose',
-      theme: 'default'
+      securityLevel: "loose",
+      theme: "default"
     });
 
     async function loadRoadmap() {
 
-      const content = document.getElementById('content');
+      const content = document.getElementById("content");
 
       try {
 
-        // Make sure Marked loaded
-        if (typeof marked === 'undefined') {
-          throw new Error('Marked.js did not load.');
+        if (typeof marked === "undefined") {
+          throw new Error("Marked.js failed to load.");
         }
 
-        // Load README
         const response = await fetch(
-          'https://raw.githubusercontent.com/nmfs-ost/AA-SI_DataRoadMap/main/README.md'
+          "https://raw.githubusercontent.com/nmfs-ost/AA-SI_DataRoadMap/main/README.md"
         );
 
         if (!response.ok) {
           throw new Error(
-            `README request failed: HTTP ${response.status}`
+            "Could not load README.md. HTTP status: " + response.status
           );
         }
 
         const markdown = await response.text();
 
-        // Convert Markdown to HTML
-        const html = marked.parse(markdown);
+        content.innerHTML = marked.parse(markdown);
 
-        content.innerHTML = html;
+        const blocks = document.querySelectorAll(
+          "pre code.language-mermaid"
+        );
 
-        // Convert Mermaid code blocks
-        const mermaidBlocks =
-          document.querySelectorAll(
-            'pre code.language-mermaid'
-          );
+        blocks.forEach(function(code) {
 
-        mermaidBlocks.forEach((code) => {
+          const pre = code.parentElement;
 
-          const pre = code.closest('pre');
+          const diagram = document.createElement("div");
 
-          const diagram = document.createElement('div');
-
-          diagram.className = 'mermaid';
+          diagram.className = "mermaid";
 
           diagram.textContent = code.textContent;
 
@@ -105,37 +88,23 @@
 
         });
 
-        // Render Mermaid
         await mermaid.run({
-          querySelector: '.mermaid'
+          querySelector: ".mermaid"
         });
 
       } catch (error) {
 
-        console.error('Roadmap loading error:', error);
+        console.error(error);
 
-        content.innerHTML = `
-          <h1>Unable to load AA-SI Data Roadmap</h1>
+        content.innerHTML =
+          "<h1>Unable to load AA-SI Data Roadmap</h1>" +
+          "<p>" + error.message + "</p>";
 
-          <p>
-            An error occurred while loading the README.
-          </p>
+      }
 
-          <pre>${error.message}</pre>
+    }
 
-```
-    `;
-
-  }
-
-}
-
-// Wait until page is fully loaded
-window.addEventListener(
-  'DOMContentLoaded',
-  loadRoadmap
-);
-```
+    loadRoadmap();
 
   </script>
 

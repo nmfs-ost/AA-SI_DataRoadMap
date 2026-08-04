@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>AA-SI Data Roadmap</title>
+
+  <!-- GitHub-style Markdown CSS -->
+
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/github-markdown-css@5.8.1/github-markdown.min.css"
+  >
+
+  <style>
+    body {
+      box-sizing: border-box;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 45px;
+    }
+
+    @media (max-width: 767px) {
+      body {
+        padding: 15px;
+      }
+    }
+
+    .markdown-body {
+      min-width: 200px;
+    }
+  </style>
+
+</head>
+
+<body>
+
+  <article id="content" class="markdown-body">
+    Loading...
+  </article>
+
+  <!-- Markdown parser -->
+
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+  <!-- Mermaid -->
+
+  <script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+
+    mermaid.initialize({
+      startOnLoad: false,
+      securityLevel: 'loose',
+      theme: 'default'
+    });
+
+    async function loadReadme() {
+      try {
+        // Load README.md from this GitHub repository
+        const response = await fetch(
+          'https://raw.githubusercontent.com/nmfs-ost/AA-SI_DataRoadMap/main/README.md'
+        );
+
+        if (!response.ok) {
+          throw new Error(
+            `Failed to load README.md: ${response.status}`
+          );
+        }
+
+        const markdown = await response.text();
+
+        // Configure Markdown parser
+        marked.setOptions({
+          gfm: true,
+          breaks: true
+        });
+
+        // Convert Markdown to HTML
+        const html = marked.parse(markdown);
+
+        // Insert HTML into page
+        document.getElementById('content').innerHTML = html;
+
+        // Find Mermaid code blocks
+        document
+          .querySelectorAll('pre code.language-mermaid')
+          .forEach((element) => {
+
+            const pre = element.parentElement;
+            const mermaidCode = element.textContent;
+
+            // Create Mermaid container
+            const div = document.createElement('div');
+            div.className = 'mermaid';
+            div.textContent = mermaidCode;
+
+            // Replace Markdown code block
+            pre.replaceWith(div);
+          });
+
+        // Render Mermaid diagrams
+        await mermaid.run({
+          querySelector: '.mermaid'
+        });
+
+      } catch (error) {
+        console.error(error);
+
+        document.getElementById('content').innerHTML = `
+          <h1>Unable to load roadmap</h1>
+          <p>
+            There was an error loading the README.md file.
+          </p>
+          <pre>${error.message}</pre>
+
+```
+    `;
+  }
+}
+
+loadReadme();
+```
+
+  </script>
+
+</body>
+</html>

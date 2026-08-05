@@ -88,7 +88,7 @@ config:
             "bottom": 30
 ---
 flowchart TB
-    subgraph SG_L0_DataSource["**Upload Raw Data to AA-SI GCS Prod Bucket**"]
+    subgraph SG_L0_DataSource["<b>Upload Raw Data to AA-SI GCS Prod Bucket</b>"]
         direction TB
         node_L0_SrcP@{shape: lean-r, label: "Platform"} --> node_L0_AA1@{ shape: tag-doc, label: <a href="https://nmfs-ost.github.io/AA-SI_aalibrary/documentation/aalibrary" target="_blank"> "aalibrary"</a><br> <a href="https://github.com/nmfs-ost/AA-SI_ConsoleTools" target="_blank"> "Console Tools" </a> } --> node_L0_GCS1@{shape: lean-r, label: <a href="https://console.cloud.google.com/storage/browser/ggn-nmfs-aa-prod-1-data;tab=objects?hl=en&inv=1&invt=Ab4KlQ&project=ggn-nmfs-aa-prod-1&pageState=(%22StorageObjectListTable%22:(%22f%22:%22%255B%255D%22))&prefix=&forceOnObjectsSortingFiltering=false" target="_blank"> "GCS Prod Bucket" </a> }
         node_L0_SrcOP@{shape: lean-r, label: "On-Prem Storage"} --> node_L0_AA2@{ shape: tag-doc, label: <a href="https://nmfs-ost.github.io/AA-SI_aalibrary/documentation/aalibrary" target="_blank"> "aalibrary"</a> } --> node_L0_GCS2@{shape: lean-r, label: <a href="https://console.cloud.google.com/storage/browser/ggn-nmfs-aa-prod-1-data;tab=objects?hl=en&inv=1&invt=Ab4KlQ&project=ggn-nmfs-aa-prod-1&pageState=(%22StorageObjectListTable%22:(%22f%22:%22%255B%255D%22))&prefix=&forceOnObjectsSortingFiltering=false" target="_blank"> "GCS Prod Bucket" </a> }
@@ -104,7 +104,7 @@ config:
             "bottom": 30
 ---
 flowchart TB
-    subgraph SG_L0_DataSource["**Download Raw Data From**"]
+    subgraph SG_L0_DataSource["<b>Download Raw Data From</b>"]
         direction TB
         node_L0_SrcOMAO@{shape: lean-r, label: "OMAO Data Lake"} --> node_L0_RTROMAO@{ shape: rounded, label: "Retrieve Data" } --> node_L0_OMAO@{ shape: tag-doc, label: "Retrieve Data from OMAO: link to instructions" }
         node_L0_SrcNCEI@{shape: lean-r, label: "NCEI"} --> node_L0_RTRNCEI@{ shape: rounded, label: "Retrieve Data" } --> node_L0_NCEI@{ shape: tag-doc, label: "Retrieve Data from NCEI: link to instructions" }
@@ -112,22 +112,22 @@ flowchart TB
         node_L0_SrcOP@{shape: lean-r, label: "On-Prem Storage"} --> node_L0_RTROP@{ shape: rounded, label: "Retrieve Data" } --> node_L0_OP@{ shape: tag-doc, label: "Retrieve Data from On-prem: link to instructions" }
         %%style node_SrcOMAO color:blue
     end
-    subgraph SG_L0_SurveyMetaData["**Survey Metadata**"]
+    subgraph SG_L0_SurveyMetaData["<b>Survey Metadata</b>"]
         direction LR
         node_L0_RF@{ shape: rounded, label: "Raw File" } --> node_L0_SMD@{ shape: database, label: <a href="https://console.cloud.google.com/bigquery?referrer=search&hl=en&invt=AbuwBQ&project=ggn-nmfs-aa-prod-1&rapt=AEjHL4OlTXzJnY9sYCgfXyE2O-JiDhka0a7L5x-wbqt9b1oGX4FYsSypa0yHTreTWIObb16IvbSrulruSRbU7J1RMJ_6Aw5owoIpWqU-wEbjaa8NZEvOt7A&ws=!1m6!1m5!4m3!1sggn-nmfs-aa-prod-1!2smetadata!3saalibrary_survey!23sTREE_NODE_SELECTION" target="_blank"> "Survey Metadata" </a> }
     end
-    subgraph SG_L0_ESManufacturer["**Echosounder Manufacturer**"]
+    subgraph SG_L0_ESManufacturer["<b>Echosounder Manufacturer</b>"]
         direction TB
         node_L0_AL1@{shape: tag-doc, label: "AA Library Function: link to instructions"} --> node_L0_Man@{ shape: lean-r, label: "Manufacturer" }
         node_L0_AL2@{shape: tag-doc, label: "EchoPype Function: link to instructions"} --> node_L0_Man
     end
-    subgraph SG_L0_ESMetaData["**Data File Format \& Metadata**"]
+    subgraph SG_L0_ESMetaData["<b>Data File Format \& Metadata</b>"]
         direction TB
         node_L0_KS@{ shape: rounded, label: "Kongsberg-Simrad" } --> node_L0_KSMD@{ shape: tag-doc, label: "link to Kongsberg-Simrad data file format and metadata" }
         node_L0_BS@{ shape: rounded, label: "BioSonics" } --> node_L0_BSMD@{ shape: tag-doc, label: "link to BioSonics data file format and metadata" }
         node_L0_ASL@{ shape: rounded, label: "ASL" } --> node_L0_ASLMD@{ shape: tag-doc, label: "link to ASL data file format and metadata" }
     end
-    subgraph SG_L0_Data["**Level 0 Data & Provenance**"]
+    subgraph SG_L0_Data["<b>Level 0 Data & Provenance</b>"]
         direction TB
         node_L0_RD@{ shape: rounded, label: "Raw File" }
         node_L0_SLMD@{ shape: database, label: "Survey-level Metadata" }
@@ -142,7 +142,7 @@ flowchart TB
     node_AcceptReject --> |Reject| node_Reject_L0@{ shape: rounded, label: "Reject: Unacceptable L0 Data: ??" }
 ```
 
-Level 0 data are survey-level, file-level, and ping-level metadata (**data provenance**) and the raw data files.
+Level 0 data are survey-level, file-level, and ping-level metadata (<b>data provenance</b>) and the raw data files.
 
 ## Level 1 Data
 ```mermaid
@@ -153,34 +153,34 @@ config:
             "bottom": 30
 ---
 flowchart TB
-    subgraph SG_L1_InputData["**Level 0 Data Input**"]
+    subgraph SG_L1_InputData["<b>Level 0 Data Input</b>"]
         direction TB
         node_L1_RD@{ shape: rounded, label: "Raw File" }
         node_L1_SMD@{ shape: database, label: "Survey Metadata" }
         node_L1_FMD@{ shape: database, label: "File-level Metadata" }
         node_L1_PMD@{ shape: database, label: "Ping-level Metadata" }
     end
-    subgraph SG_L1A_GPS["**Level 1A - GPS**"]
+    subgraph SG_L1A_GPS["<b>Level 1A - GPS</b>"]
         direction TB
         node_L1A_GPS@{ shape: tag-doc, label: "GPS QA/QC" }
     end
-    subgraph SG_L1A_MD["**Level 1A - Supplemental Metadata**"]
+    subgraph SG_L1A_MD["<b>Level 1A - Supplemental Metadata</b>"]
         direction TB
         node_L1A_MD@{ shape: rounded, label: "Harvest Supplemental Metadata" } 
     end
-    subgraph SG_L1B_MergeGPS["**Level 1B - Merge GPS**"]
+    subgraph SG_L1B_MergeGPS["<b>Level 1B - Merge GPS</b>"]
         direction TB
         node_L1B_MergeGPS@{ shape: rounded, label: "Merge GPS Data" } 
     end
-    subgraph SG_L1B_TimeCorr["**Level 1B - Time Coordinate Correction**"]
+    subgraph SG_L1B_TimeCorr["<b>Level 1B - Time Coordinate Correction</b>"]
         direction TB
         node_L1B_TimeCorr@{ shape: rounded, label: "Apply Time Coordinate Correction" } 
     end
-    subgraph SG_L1B_Motion["**Level 1B - Motion Correction**"]
+    subgraph SG_L1B_Motion["<b>Level 1B - Motion Correction</b>"]
         direction TB
         node_L1B_Motion@{ shape: rounded, label: "Apply Motion Correction" } 
     end
-    subgraph SG_L1B_OS["**Open-Source File Format**"]
+    subgraph SG_L1B_OS["<b>Open-Source File Format</b>"]
         direction LR
         node_L1B_EP@{ shape: rounded, label: "echoPype Format"}
         node_L1B_sonarNet@{ shape: rounded, label: "sonarNET-CDF4 Format"}
@@ -200,7 +200,7 @@ SG_L1B_Motion --> |Reject| node_Reject_L1B@{ shape: rounded, label: "Reject: Una
 
 
 ```
-Level 1 data are the Echopype netCDF4 data file, supplemental data files, and metadata (**data provenance**).  
+Level 1 data are the Echopype netCDF4 data file, supplemental data files, and metadata (<b>data provenance</b>).  
 
 ## Level 2 Data
 ```mermaid
@@ -211,7 +211,7 @@ config:
             "bottom": 30
 ---
 flowchart TB
-    subgraph SG_L2_InputData["**Level 1 Data Input**"]
+    subgraph SG_L2_InputData["<b>Level 1 Data Input</b>"]
         direction TB
         node_L2_RD@{ shape: rounded, label: "Data in echoPype Format" }
         node_L2_SMD@{ shape: database, label: "Survey Metadata" }
@@ -219,11 +219,11 @@ flowchart TB
         node_L2_PMD@{ shape: database, label: "Ping-level Metadata" }
         node_L2_Cal@{ shape: rounded, label: "Calibration Data" }
     end
-    subgraph SG_L2A_Cal["**Level 2A - Apply Calibration**"]
+    subgraph SG_L2A_Cal["<b>Level 2A - Apply Calibration</b>"]
         direction TB
         node_L2A_Cal@{ shape: tag-doc, label: "Calibration QA/QC" }
     end
-    subgraph SG_L2B_Exclusion["**Level 2B - Exclusion Regions**"]
+    subgraph SG_L2B_Exclusion["<b>Level 2B - Exclusion Regions</b>"]
         direction TB
         node_L2B_Exclusion@{ shape: rounded, label: "Remove Exclusion Regions" } --> node_L2B_ExOK@{ shape: tag-doc, label: "Exclusion Regions QA/QC" }
     end
@@ -244,26 +244,26 @@ config:
             "bottom": 30
 ---
 flowchart TB
-    subgraph SG_L3_InputData["**Level 2 Data Input**"]
+    subgraph SG_L3_InputData["<b>Level 2 Data Input</b>"]
         direction TB
         node_L3_RD@{ shape: rounded, label: "Calibrated, noise reduced echoPype Data" }
         node_L3_SMD@{ shape: database, label: "Survey Metadata" }
         node_L3_FMD@{ shape: database, label: "File-level Metadata" }
         node_L3_PMD@{ shape: database, label: "Ping-level Metadata" }
     end
-    subgraph SG_L3A_Grid["**Level 3A - Apply Gridding**"]
+    subgraph SG_L3A_Grid["<b>Level 3A - Apply Gridding</b>"]
         direction TB
         node_L3A_Grid@{ shape: tag-doc, label: "Apply Spatiotemporal Grid" }
     end
-    subgraph SG_L3A_ValData["**Level 3A - Grid Validated Data**"]
+    subgraph SG_L3A_ValData["<b>Level 3A - Grid Validated Data</b>"]
         direction TB
         node_L3A_ValData@{ shape: tag-doc, label: "Grid Validated Data" }
     end
-    subgraph SG_L3B_QAQC["**Level 3B - Apply Final QA/QC Criteria**"]
+    subgraph SG_L3B_QAQC["<b>Level 3B - Apply Final QA/QC Criteria</b>"]
         direction TB
         node_L3B_QAQC@{ shape: rounded, label: "Apply Final QA/QC" }
     end
-    subgraph SG_L3B_Output["**Level 3B Output**"]
+    subgraph SG_L3B_Output["<b>Level 3B Output</b>"]
         direction TB
         node_L3B_RD@{ shape: rounded, label: "Gridded, calibrated, noise reduced echoPype Data" }
         node_L3B_SMD@{ shape: database, label: "Survey Metadata" }
@@ -291,7 +291,7 @@ SONAR, multibeam) from raw manufacturer files through to gridded, ML-ready
 products. Each processing level transforms the data and writes a new NetCDF
 file; the next stage reads it via path-based piping (`tool | tool | tool`).
 
-> **Legend** — Tools marked with `*` are **suggested / theoretical**: they
+> <b>Legend</b> — Tools marked with `*` are <b>suggested / theoretical</b>: they
 > follow the established `aa-*` naming convention but have not been built yet.
 > Unmarked tools exist in the current suite.
 
@@ -392,7 +392,7 @@ flowchart TD
     classDef ml        fill:#e8defa,stroke:#5b2a8c,stroke-width:1px,color:#2a1247;
 ```
 
-**Status colors**
+<b>Status colors</b>
 
 | Color | Meaning |
 |---|---|
@@ -412,7 +412,7 @@ recorded it, what configuration was running, and what each ping looks like.
 Output is metadata records that get written to the metadata DB; the raw file
 itself is staged for the next level.
 
-**Tools:** `aa-find`, `aa-get`, `aa-fetch`, `aa-raw`, `aa-meta-survey*`,
+<b>Tools:</b> `aa-find`, `aa-get`, `aa-fetch`, `aa-raw`, `aa-meta-survey*`,
 `aa-id-manufacturer*`, `aa-id-acquisition*`, `aa-meta-file*`, `aa-meta-ping*`,
 `aa-meta-push*`, `aa-meta-query*`
 
@@ -423,7 +423,7 @@ the supplemental data streams embedded in the raw file (motion, navigation,
 sound speed, attenuation). These streams are needed for the corrections
 applied in 1B.
 
-**Tools:** `aa-gps-check*`, `aa-harvest-suppl*`
+<b>Tools:</b> `aa-gps-check*`, `aa-harvest-suppl*`
 
 ### Level 1B — QA/QC & Open-Format Reformat
 
@@ -434,7 +434,7 @@ optionally the strict ICES SONAR-netCDF4 format for external coordination).
 This is the boundary where manufacturer-specific formats stop and standard
 formats begin.
 
-**Tools:** `aa-location`, `aa-merge-suppl*`, `aa-coerce-time`,
+<b>Tools:</b> `aa-location`, `aa-merge-suppl*`, `aa-coerce-time`,
 `aa-motion-correct*`, `aa-nc`, `aa-export-sonarnc4*`
 
 ### Level 2A — Calibration
@@ -444,7 +444,7 @@ correction, etc.) and applies them while computing Sv (volume backscattering
 strength) and TS (target strength). Also augments the dataset with split-beam
 angles, depth axis, and a frequency-indexed view.
 
-**Tools:** `aa-cal-fetch*`, `aa-calibrate*`, `aa-sv`, `aa-ts`,
+<b>Tools:</b> `aa-cal-fetch*`, `aa-calibrate*`, `aa-sv`, `aa-ts`,
 `aa-splitbeam-angle`, `aa-depth`, `aa-swap-freq`
 
 ### Level 2B — Noise Reduction & Exclusion
@@ -454,7 +454,7 @@ impulse noise, transient noise, attenuated pings, bubble sweep-down, hull and
 CTD echoes, and the seabed echo. Manual exclusion lines and regions can also
 be imported from Echoview (`.evl`, `.evr`).
 
-**Tools:** `aa-clean`, `aa-noise-est`, `aa-impulse`, `aa-min`, `aa-transient`,
+<b>Tools:</b> `aa-clean`, `aa-noise-est`, `aa-impulse`, `aa-min`, `aa-transient`,
 `aa-detect-transient`, `aa-attenuated`, `aa-freqdiff`, `aa-detect-seafloor`,
 `aa-detect-shoal`, `aa-bubble-mask*`, `aa-instrument-mask*`, `aa-evl`,
 `aa-evr`
@@ -466,7 +466,7 @@ Backscattering Strength) averages Sv in time × range cells; NASC (Nautical
 Area Scattering Coefficient) integrates Sv over depth and distance for
 biomass estimation. Grid coverage is validated against source extents.
 
-**Tools:** `aa-mvbs`, `aa-mvbs-index`, `aa-nasc`, `aa-grid-validate*`
+<b>Tools:</b> `aa-mvbs`, `aa-mvbs-index`, `aa-nasc`, `aa-grid-validate*`
 
 ### Level 3B — QA/QC of Gridded Products
 
@@ -474,7 +474,7 @@ Checks the gridded output for coverage gaps, bin counts, NaN rates, and
 outliers, and computes summary metrics that downstream models or analysts
 can use as features or sanity checks.
 
-**Tools:** `aa-grid-qc*`, `aa-abundance`, `aa-aggregation`,
+<b>Tools:</b> `aa-grid-qc*`, `aa-abundance`, `aa-aggregation`,
 `aa-center-of-mass`, `aa-dispersion`, `aa-evenness`
 
 ### Level 4 — AI/ML Clustering

@@ -4,6 +4,12 @@ The AA-SI is developing a data pipeline to store, process, and analyze data, and
 Our data road map is based on echoPype's data processing levels <a href="https://echolevels.readthedocs.io/en/latest/levels_proposed.html"> "echoPype processing levels"</a>, where each level represents a step from "raw" data in manufacturer-specified file formats to gridded data that are ready for input to advanced analytical models, such as, machine learning (ML), artificial intelligence (AI), Bayesian inverse (APES), and other advanced statistical models. Active-acoustic data (e.g., echosounder, SONAR, multibeam) are our primary data set, but we include supplemental data, such as oceanographic, biological, and geological data that characterize the environment, as well as metadata for all data streams.
 
 For active acoustic data, we define the levels and processes within those levels as:  
+- **Level -1**
+    - **Input:** raw data from the acquisition platform in manufacturer-specified format
+    - **Processes:**
+      - Upload data from the platform to the <a href="https://console.cloud.google.com/storage/browser/ggn-nmfs-aa-prod-1-data;tab=objects?hl=en&inv=1&invt=Ab4KlQ&project=ggn-nmfs-aa-prod-1&pageState=(%22StorageObjectListTable%22:(%22f%22:%22%255B%255D%22))&prefix=&forceOnObjectsSortingFiltering=false"> "AA-SI GCS bucket" </a>
+    - **Output:**
+      - raw data files in the <a href="https://console.cloud.google.com/storage/browser/ggn-nmfs-aa-prod-1-data;tab=objects?hl=en&inv=1&invt=Ab4KlQ&project=ggn-nmfs-aa-prod-1&pageState=(%22StorageObjectListTable%22:(%22f%22:%22%255B%255D%22))&prefix=&forceOnObjectsSortingFiltering=false"> "AA-SI GCS bucket" </a>
 - **Level 0**  
     - **Input:** raw data file in manufacturer-specified format located in the cloud or on-premise
     - **Processes:** 
@@ -82,7 +88,7 @@ config:
             "bottom": 30
 ---
 flowchart TB
-    subgraph SG_L0_DataSource["**Raw Data Source**"]
+    subgraph SG_L0_DataSource["**Download Raw Data From**"]
         direction TB
         node_L0_SrcOMAO@{shape: lean-r, label: "OMAO Data Lake"} --> node_L0_RTROMAO@{ shape: rounded, label: "Retrieve Data" } --> node_L0_OMAO@{ shape: tag-doc, label: "Retrieve Data from OMAO: link to instructions" }
         node_L0_SrcNCEI@{shape: lean-r, label: "NCEI"} --> node_L0_RTRNCEI@{ shape: rounded, label: "Retrieve Data" } --> node_L0_NCEI@{ shape: tag-doc, label: "Retrieve Data from NCEI: link to instructions" }

@@ -84,10 +84,10 @@ config:
 flowchart TB
     subgraph SG_L0_DataSource["**Raw Data Source**"]
         direction TB
-        node_L0_SrcOMAO@{shape: lean-r, label: "OMAO Data Lake"} --> node_L0_OMAO@{ shape: tag-doc, label: "Retrieve Data from OMAO: link to instructions" }
-        node_L0_SrcNCEI@{shape: lean-r, label: "NCEI"} --> node_L0_NCEI@{ shape: tag-doc, label: "Retrieve Data from NCEI: link to instructions" }
-        node_L0_SrcGCP@{shape: lean-r, label: "GCP Prod Storage"} --> node_L0_GCP@{ shape: tag-doc, label: <a href="https://nmfs-ost.github.io/AA-SI_aalibrary/documentation/aalibrary"> "Retrieve Data from GCP"</a> }
-        node_L0_SrcOP@{shape: lean-r, label: "On-Prem Storage"} --> node_L0_OP@{ shape: tag-doc, label: "Retrieve Data from On-prem: link to instructions" }
+        node_L0_SrcOMAO@{shape: lean-r, label: "OMAO Data Lake"} --> node_L0_RDOMAO@{ shape: rounded, label: "Retrieve Data" } --> node_L0_OMAO@{ shape: tag-doc, label: "Retrieve Data from OMAO: link to instructions" }
+        node_L0_SrcNCEI@{shape: lean-r, label: "NCEI"} --> node_L0_RDNCEI@{ shape: rounded, label: "Retrieve Data" } --> node_L0_NCEI@{ shape: tag-doc, label: "Retrieve Data from NCEI: link to instructions" }
+        node_L0_SrcGCP@{shape: lean-r, label: "GCP Prod Storage"} --> node_L0_RDGCP@{ shape: rounded, label: "Retrieve Data" } --> node_L0_GCP@{ shape: tag-doc, label: <a href="https://nmfs-ost.github.io/AA-SI_aalibrary/documentation/aalibrary"> "aalibrary"</a><br> <a href="https://github.com/nmfs-ost/AA-SI_ConsoleTools"> "Console Tools" </a> }
+        node_L0_SrcOP@{shape: lean-r, label: "On-Prem Storage"} --> node_L0_RDOP@{ shape: rounded, label: "Retrieve Data" } --> node_L0_OP@{ shape: tag-doc, label: "Retrieve Data from On-prem: link to instructions" }
         %%style node_SrcOMAO color:blue
     end
     subgraph SG_L0_SurveyMetaData["**Survey Metadata**"]

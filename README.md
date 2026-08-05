@@ -92,7 +92,7 @@ flowchart TB
     end
     subgraph SG_L0_SurveyMetaData["**Survey Metadata**"]
         direction LR
-        node_L0_RF@{ shape: rounded, label: "Raw File" } --> node_L0_SMD@{ shape: database, label: <a href="https://github.com/nmfs-ost/AA-SI_metadata"> "Survey Metadata"</a> }
+        node_L0_RF@{ shape: rounded, label: "Raw File" } --> node_L0_SMD@{ shape: database, label: <a href="https://console.cloud.google.com/bigquery?referrer=search&hl=en&invt=AbuwBQ&project=ggn-nmfs-aa-prod-1&rapt=AEjHL4OlTXzJnY9sYCgfXyE2O-JiDhka0a7L5x-wbqt9b1oGX4FYsSypa0yHTreTWIObb16IvbSrulruSRbU7J1RMJ_6Aw5owoIpWqU-wEbjaa8NZEvOt7A"> "Survey Metadata"</a> }
     end
     subgraph SG_L0_ESManufacturer["**Echosounder Manufacturer**"]
         direction TB
@@ -105,7 +105,7 @@ flowchart TB
         node_L0_BS@{ shape: rounded, label: "BioSonics" } --> node_L0_BSMD@{ shape: tag-doc, label: "link to BioSonics data file format and metadata" }
         node_L0_ASL@{ shape: rounded, label: "ASL" } --> node_L0_ASLMD@{ shape: tag-doc, label: "link to ASL data file format and metadata" }
     end
-    subgraph SG_L0_Data["**Level 0 Data & Provencance**"]
+    subgraph SG_L0_Data["**Level 0 Data & Provenance**"]
         direction TB
         node_L0_RD@{ shape: rounded, label: "Raw File" }
         node_L0_SMD@{ shape: database, label: "Survey Metadata" }

@@ -92,7 +92,7 @@ flowchart TB
     end
     subgraph SG_L0_SurveyMetaData["**Survey Metadata**"]
         direction LR
-        node_L0_RF@{ shape: rounded, label: "Raw File" } --> node_L0_SMD@{ shape: database, label: <a href="https://console.cloud.google.com/bigquery?referrer=search&hl=en&invt=AbuwBQ&project=ggn-nmfs-aa-prod-1&rapt=AEjHL4OlTXzJnY9sYCgfXyE2O-JiDhka0a7L5x-wbqt9b1oGX4FYsSypa0yHTreTWIObb16IvbSrulruSRbU7J1RMJ_6Aw5owoIpWqU-wEbjaa8NZEvOt7A&ws=!1m6!1m5!4m3!1sggn-nmfs-aa-prod-1!2smetadata!3saalibrary_survey!23sTREE_NODE_SELECTION"> "Survey Metadata" </a> }
+        node_L0_RF@{ shape: rounded, label: "Raw File" } --> node_L0_SMD@{ shape: database, label: <a href="https://console.cloud.google.com/bigquery?referrer=search&hl=en&invt=AbuwBQ&project=ggn-nmfs-aa-prod-1&rapt=AEjHL4OlTXzJnY9sYCgfXyE2O-JiDhka0a7L5x-wbqt9b1oGX4FYsSypa0yHTreTWIObb16IvbSrulruSRbU7J1RMJ_6Aw5owoIpWqU-wEbjaa8NZEvOt7A&ws=!1m6!1m5!4m3!1sggn-nmfs-aa-prod-1!2smetadata!3saalibrary_survey!23sTREE_NODE_SELECTION" target="_blank"> "Survey Metadata" </a> }
     end
     subgraph SG_L0_ESManufacturer["**Echosounder Manufacturer**"]
         direction TB

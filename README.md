@@ -92,7 +92,7 @@ flowchart TB
     end
     subgraph SG_L0_SurveyMetaData["**Survey Metadata**"]
         direction LR
-        node_L0_RF@{ shape: rounded, label: "Raw File" } --> node_L0_SMD@{ shape: database, label: <a href="https://console.cloud.google.com/bigquery?referrer=search&hl=en&invt=AbuwBQ&project=ggn-nmfs-aa-prod-1&rapt=AEjHL4OlTXzJnY9sYCgfXyE2O-JiDhka0a7L5x-wbqt9b1oGX4FYsSypa0yHTreTWIObb16IvbSrulruSRbU7J1RMJ_6Aw5owoIpWqU-wEbjaa8NZEvOt7A"> "test Survey Metadata" </a> }
+        node_L0_RF@{ shape: rounded, label: "Raw File" } --> node_L0_SMD@{ shape: database, label: <a href="https://console.cloud.google.com/bigquery?referrer=search&hl=en&invt=AbuwBQ&project=ggn-nmfs-aa-prod-1&rapt=AEjHL4OlTXzJnY9sYCgfXyE2O-JiDhka0a7L5x-wbqt9b1oGX4FYsSypa0yHTreTWIObb16IvbSrulruSRbU7J1RMJ_6Aw5owoIpWqU-wEbjaa8NZEvOt7A"> "Survey Metadata" </a> }
     end
     subgraph SG_L0_ESManufacturer["**Echosounder Manufacturer**"]
         direction TB
@@ -108,9 +108,9 @@ flowchart TB
     subgraph SG_L0_Data["**Level 0 Data & Provenance**"]
         direction TB
         node_L0_RD@{ shape: rounded, label: "Raw File" }
-        node_L0_SMD@{ shape: database, label: "Survey Metadata" }
-        node_L0_FMD@{ shape: database, label: "File-level Metadata" }
-        node_L0_PMD@{ shape: database, label: "Ping-level Metadata" }
+        node_L0_SLMD@{ shape: database, label: "Survey-level Metadata" }
+        node_L0_FLMD@{ shape: database, label: "File-level Metadata" }
+        node_L0_PLMD@{ shape: database, label: "Ping-level Metadata" }
     end
     SG_L0_DataSource --> SG_L0_SurveyMetaData
     SG_L0_SurveyMetaData --> SG_L0_ESManufacturer

@@ -280,7 +280,3 @@ SG_L3B_QAQC --> |Reject| node_Reject_L3B@{ shape: rounded, label: "Reject: Unacc
 ```
 Level 3 data are ready for ingest to advanced AI/ML and analytical models
 
-
-Each stage appends a suffix to the input filename
-(`raw.nc → raw_Sv.nc → raw_Sv_clean.nc → …`), so intermediates are inspectable
-and the pipeline is restart-able from any point.

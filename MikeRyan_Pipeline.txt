@@ -226,3 +226,7 @@ aa-nc raw.raw --sonar_model EK60 \
   | aa-mvbs \
   | aa-hdbscan
 ```
+
+Each stage appends a suffix to the input filename
+(`raw.nc → raw_Sv.nc → raw_Sv_clean.nc → …`), so intermediates are inspectable
+and the pipeline is restart-able from any point.

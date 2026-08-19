@@ -94,6 +94,11 @@ flowchart TB
         node_L-1_SrcOP@{shape: lean-r, label: "On-Prem Storage"} --> node_L-1_AA2@{ shape: tag-doc, label: <a href="https://nmfs-ost.github.io/AA-SI_aalibrary/documentation/aalibrary" target="_blank"> "aalibrary"</a> } --> node_L-1_GCS2@{shape: lean-r, label: <a href="https://console.cloud.google.com/storage/browser/ggn-nmfs-aa-prod-1-data;tab=objects?hl=en&inv=1&invt=Ab4KlQ&project=ggn-nmfs-aa-prod-1&pageState=(%22StorageObjectListTable%22:(%22f%22:%22%255B%255D%22))&prefix=&forceOnObjectsSortingFiltering=false" target="_blank"> "GCS Prod Bucket" </a> }
         %%style node_SrcOMAO color:blue
     end
+    subgraph SG_L-1_Tugboat["<b>NCEI Tugboat</b>"]
+        direction TB
+        node_L-1_TB@{shape: database, label: "link to Tugboat UI" }
+    end
+    SG_L-1_DataSource --> SG_L-1_Tugboat
 ```
 ## Level 0 Data
 ```mermaid

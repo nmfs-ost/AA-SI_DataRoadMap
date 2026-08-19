@@ -88,10 +88,10 @@ config:
             "bottom": 30
 ---
 flowchart TB
-    subgraph SG_L0_DataSource["<b>Upload Raw Data to AA-SI GCS Prod Bucket</b>"]
+    subgraph SG_L-1_DataSource["<b>Upload Raw Data to AA-SI GCS Prod Bucket</b>"]
         direction TB
-        node_L0_SrcP@{shape: lean-r, label: "Platform"} --> node_L0_AA1@{ shape: tag-doc, label: <a href="https://nmfs-ost.github.io/AA-SI_aalibrary/documentation/aalibrary" target="_blank"> "aalibrary"</a><br> <a href="https://github.com/nmfs-ost/AA-SI_ConsoleTools" target="_blank"> "Console Tools" </a> } --> node_L0_GCS1@{shape: lean-r, label: <a href="https://console.cloud.google.com/storage/browser/ggn-nmfs-aa-prod-1-data;tab=objects?hl=en&inv=1&invt=Ab4KlQ&project=ggn-nmfs-aa-prod-1&pageState=(%22StorageObjectListTable%22:(%22f%22:%22%255B%255D%22))&prefix=&forceOnObjectsSortingFiltering=false" target="_blank"> "GCS Prod Bucket" </a> }
-        node_L0_SrcOP@{shape: lean-r, label: "On-Prem Storage"} --> node_L0_AA2@{ shape: tag-doc, label: <a href="https://nmfs-ost.github.io/AA-SI_aalibrary/documentation/aalibrary" target="_blank"> "aalibrary"</a> } --> node_L0_GCS2@{shape: lean-r, label: <a href="https://console.cloud.google.com/storage/browser/ggn-nmfs-aa-prod-1-data;tab=objects?hl=en&inv=1&invt=Ab4KlQ&project=ggn-nmfs-aa-prod-1&pageState=(%22StorageObjectListTable%22:(%22f%22:%22%255B%255D%22))&prefix=&forceOnObjectsSortingFiltering=false" target="_blank"> "GCS Prod Bucket" </a> }
+        node_L-1_SrcP@{shape: lean-r, label: "Platform"} --> node_L-1_AA1@{ shape: tag-doc, label: <a href="https://nmfs-ost.github.io/AA-SI_aalibrary/documentation/aalibrary" target="_blank"> "aalibrary"</a><br> <a href="https://github.com/nmfs-ost/AA-SI_ConsoleTools" target="_blank"> "Console Tools" </a> } --> node_L-1_GCS1@{shape: lean-r, label: <a href="https://console.cloud.google.com/storage/browser/ggn-nmfs-aa-prod-1-data;tab=objects?hl=en&inv=1&invt=Ab4KlQ&project=ggn-nmfs-aa-prod-1&pageState=(%22StorageObjectListTable%22:(%22f%22:%22%255B%255D%22))&prefix=&forceOnObjectsSortingFiltering=false" target="_blank"> "GCS Prod Bucket" </a> }
+        node_L-1_SrcOP@{shape: lean-r, label: "On-Prem Storage"} --> node_L-1_AA2@{ shape: tag-doc, label: <a href="https://nmfs-ost.github.io/AA-SI_aalibrary/documentation/aalibrary" target="_blank"> "aalibrary"</a> } --> node_L-1_GCS2@{shape: lean-r, label: <a href="https://console.cloud.google.com/storage/browser/ggn-nmfs-aa-prod-1-data;tab=objects?hl=en&inv=1&invt=Ab4KlQ&project=ggn-nmfs-aa-prod-1&pageState=(%22StorageObjectListTable%22:(%22f%22:%22%255B%255D%22))&prefix=&forceOnObjectsSortingFiltering=false" target="_blank"> "GCS Prod Bucket" </a> }
         %%style node_SrcOMAO color:blue
     end
 ```

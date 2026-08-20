@@ -96,7 +96,7 @@ flowchart TB
     end
     subgraph SG_L-1_Tugboat["<b>NCEI Tugboat</b>"]
         direction TB
-        node_L-1_TB["<img src='https://github.com/nmfs-ost/AA-SI_DataRoadMap/docs/tugboat_icon.png' width='30' height='20'/>"]
+        node_L-1_TB@{shape: database, label: 'Tugboat UI' }
     end
     SG_L-1_DataSource --> SG_L-1_Tugboat
 ```

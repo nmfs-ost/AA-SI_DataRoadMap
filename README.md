@@ -229,7 +229,7 @@ flowchart TB
         node_L2_SMD@{ shape: database, label: "Survey Metadata" }
         node_L2_FMD@{ shape: database, label: "File-level Metadata" }
         node_L2_PMD@{ shape: database, label: "Ping-level Metadata" }
-        node_L2_Cal@{ shape: rounded, label: "Calibration Data" }
+        node_L2_Cal@{ shape: rounded, label: <a href="https://github.com/BLayman-NOAA/AA-SI_calibration/blob/main/standardized_file/examples/current_drafts/2023-07-20__200000__config-2.yaml"> "Calibration Data" </a> }
     end
     subgraph SG_L2A_Cal["<b>Level 2A - Apply Calibration</b>"]
         direction TB

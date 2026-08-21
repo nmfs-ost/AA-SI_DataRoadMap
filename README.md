@@ -292,3 +292,20 @@ SG_L3B_QAQC --> |Reject| node_Reject_L3B@{ shape: rounded, label: "Reject: Unacc
 ```
 Level 3 data are ready for ingest to advanced AI/ML and analytical models
 
+## Level 4 Data
+Level 4 data are AI/ML and analytical model implementations
+
+
+```mermaid
+---
+config:
+    flowchart:
+        subGraphTitleMargin:
+            "bottom": 30
+---
+flowchart TB
+    subgraph SG_L4_GSlide["<b>Level 4 Data Input</b>"]
+        direction TB
+        node_L4_GS@{ shape: rounded, label: <a href="https://docs.google.com/presentation/d/13i3p6nxpBaUgsNCfry94N5wEu3aH0JsM7Qlj_ceuc6E/edit?slide=id.g3f5f8231bb8_0_633#slide=id.g3f5f8231bb8_0_633"> "OMAO Practical Examples" </a> }
+    end
+

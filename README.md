@@ -116,11 +116,16 @@ config:
             "bottom": 30
 ---
 flowchart TB
+    subgraph SG_L0_RM["<b><a href='https://blayman-noaa.github.io/AA-SI_recipe_manager/levels/level-0/' target='_blank'>Level 0 Recipes</a></b>"]
+        direction LR
+        node_L0_RM_HB1603@{ shape: tag-doc, label: <a href="https://blayman-noaa.github.io/AA-SI_recipe_manager/levels/level-0/#hb1603" target="_blank"> "HB1603" </a> }
+        node_L0_RM_HB2407@{ shape: tag-doc, label: <a href="https://blayman-noaa.github.io/AA-SI_recipe_manager/levels/level-0/#hb2407" target="_blank"> "HB2407" </a> }
+    end
     subgraph SG_L0_DataSource["<b>Retrieve Data</b>"]
         direction TB
         node_L0_SrcOMAO@{shape: lean-r, label: "OMAO Data Lake"} --> node_L0_OMAO@{ shape: tag-doc, label: "link to instructions" }
-        node_L0_SrcNCEI@{shape: lean-r, label: "NCEI"} --> node_L0_NCEI@{ shape: tag-doc, label: "link to instructions" }
-        node_L0_SrcGCP@{shape: lean-r, label: "GCP Prod Storage"} --> node_L0_GCP@{ shape: tag-doc, label: <a href="https://nmfs-ost.github.io/AA-SI_aalibrary/documentation/aalibrary" target="_blank"> "aalibrary"</a><br> <a href="https://github.com/nmfs-ost/AA-SI_ConsoleTools" target="_blank"> "Console Tools" </a> }
+        node_L0_SrcNCEI@{shape: lean-r, label: "NCEI"} --> node_L0_NCEI@{ shape: tag-doc, label: link to instructions<br> <a href="https://blayman-noaa.github.io/AA-SI_recipe_manager/levels/level-0/#downloading-from-ncei-instead" target="_blank"> "NCEI query and download recipe" </a> }
+        node_L0_SrcGCP@{shape: lean-r, label: "GCP Prod Storage"} --> node_L0_GCP@{ shape: tag-doc, label: <a href="https://nmfs-ost.github.io/AA-SI_aalibrary/documentation/aalibrary" target="_blank"> "aalibrary"</a><br> <a href="https://github.com/nmfs-ost/AA-SI_ConsoleTools" target="_blank"> "Console Tools" </a><br> <a href="https://blayman-noaa.github.io/AA-SI_recipe_manager/ops/initial_setup/" target="_blank"> "initial_setup op" </a> }
         node_L0_SrcOP@{shape: lean-r, label: "On-Prem Storage"} --> node_L0_OP@{ shape: tag-doc, label: "link to instructions" }
         %%style node_SrcOMAO color:blue
     end
@@ -143,7 +148,7 @@ flowchart TB
         direction TB
         node_L0_RD@{ shape: rounded, label: "Raw File" }
         node_L0_SLMD@{ shape: database, label: "Survey-level Metadata" }
-        node_L0_FLMD@{ shape: database, label: "File-level Metadata" }
+        node_L0_FLMD@{ shape: database, label: File-level Metadata<br> <a href="https://blayman-noaa.github.io/AA-SI_recipe_manager/ops/read_raw_file_config/" target="_blank"> "read_raw_file_config op" </a> }
         node_L0_PLMD@{ shape: database, label: "Ping-level Metadata" }
     end
     SG_L0_DataSource --> SG_L0_SurveyMetaData
@@ -165,6 +170,11 @@ config:
             "bottom": 30
 ---
 flowchart TB
+    subgraph SG_L1_RM["<b><a href='https://blayman-noaa.github.io/AA-SI_recipe_manager/levels/level-1/' target='_blank'>Level 1 Recipes</a></b>"]
+        direction LR
+        node_L1_RM_HB1603@{ shape: tag-doc, label: <a href="https://blayman-noaa.github.io/AA-SI_recipe_manager/levels/level-1/#hb1603" target="_blank"> "HB1603" </a> }
+        node_L1_RM_HB2407@{ shape: tag-doc, label: <a href="https://blayman-noaa.github.io/AA-SI_recipe_manager/levels/level-1/#hb2407" target="_blank"> "HB2407" </a> }
+    end
     subgraph SG_L1_InputData["<b>Level 0 Data Input</b>"]
         direction TB
         node_L1_RD@{ shape: rounded, label: "Raw File" }
@@ -194,7 +204,7 @@ flowchart TB
     end
     subgraph SG_L1B_OS["<b>Open-Source File Format</b>"]
         direction LR
-        node_L1B_EP@{ shape: rounded, label: "echoPype Format"}
+        node_L1B_EP@{ shape: rounded, label: echoPype Format<br> <a href="https://blayman-noaa.github.io/AA-SI_recipe_manager/ops/read_raw_files/" target="_blank"> "read_raw_files op" </a> }
         node_L1B_sonarNet@{ shape: rounded, label: "sonarNET-CDF4 Format"}
         node_L1B_suppdata@{ shape: rounded, label: "Supplemental Data"}
         node_L1B_SMD@{ shape: database, label: "Survey Metadata" }
@@ -223,13 +233,18 @@ config:
             "bottom": 30
 ---
 flowchart TB
+    subgraph SG_L2_RM["<b><a href='https://blayman-noaa.github.io/AA-SI_recipe_manager/levels/level-2/' target='_blank'>Level 2 Recipes</a></b>"]
+        direction LR
+        node_L2_RM_HB1603@{ shape: tag-doc, label: <a href="https://blayman-noaa.github.io/AA-SI_recipe_manager/levels/level-2/#hb1603" target="_blank"> "HB1603" </a> }
+        node_L2_RM_HB2407@{ shape: tag-doc, label: <a href="https://blayman-noaa.github.io/AA-SI_recipe_manager/levels/level-2/#hb2407" target="_blank"> "HB2407" </a> }
+    end
     subgraph SG_L2_InputData["<b>Level 1 Data Input</b>"]
         direction TB
         node_L2_RD@{ shape: rounded, label: "Data in echoPype Format" }
         node_L2_SMD@{ shape: database, label: "Survey Metadata" }
         node_L2_FMD@{ shape: database, label: "File-level Metadata" }
         node_L2_PMD@{ shape: database, label: "Ping-level Metadata" }
-        node_L2_Cal@{ shape: rounded, label: <a href="https://github.com/BLayman-NOAA/AA-SI_calibration/blob/main/standardized_file/examples/current_drafts/2023-07-20__200000__config-2.yaml"> "Calibration Data" </a> }
+        node_L2_Cal@{ shape: rounded, label: <a href="https://github.com/BLayman-NOAA/AA-SI_calibration/blob/main/standardized_file/examples/current_drafts/2023-07-20__200000__config-2.yaml"> "Calibration Data" </a><br> <a href="https://blayman-noaa.github.io/AA-SI_recipe_manager/calibration/" target="_blank"> "calibration recipe" </a> }
     end
     subgraph SG_L2A_Cal["<b>Level 2A - Apply Calibration</b>"]
         direction TB
@@ -237,7 +252,7 @@ flowchart TB
     end
     subgraph SG_L2B_Exclusion["<b>Level 2B - Exclusion Regions</b>"]
         direction TB
-        node_L2B_Exclusion@{ shape: rounded, label: "Remove Exclusion Regions" } --> node_L2B_ExOK@{ shape: tag-doc, label: "Exclusion Regions QA/QC" }
+        node_L2B_Exclusion@{ shape: rounded, label: Remove Exclusion Regions<br> <a href="https://blayman-noaa.github.io/AA-SI_recipe_manager/levels/level-2/#masks-and-noise-removal" target="_blank"> "masks and noise removal recipe" </a> } --> node_L2B_ExOK@{ shape: tag-doc, label: "Exclusion Regions QA/QC" }
     end
 
 SG_L2_InputData --> SG_L2A_Cal
@@ -256,6 +271,11 @@ config:
             "bottom": 30
 ---
 flowchart TB
+    subgraph SG_L3_RM["<b><a href='https://blayman-noaa.github.io/AA-SI_recipe_manager/levels/level-3/' target='_blank'>Level 3 Recipes</a></b>"]
+        direction LR
+        node_L3_RM_HB1603@{ shape: tag-doc, label: <a href="https://blayman-noaa.github.io/AA-SI_recipe_manager/levels/level-3/#hb1603" target="_blank"> "HB1603" </a> }
+        node_L3_RM_HB2407@{ shape: tag-doc, label: <a href="https://blayman-noaa.github.io/AA-SI_recipe_manager/levels/level-3/#hb2407" target="_blank"> "HB2407" </a> }
+    end
     subgraph SG_L3_InputData["<b>Level 2 Data Input</b>"]
         direction TB
         node_L3_RD@{ shape: rounded, label: "Calibrated, noise reduced echoPype Data" }
@@ -304,16 +324,21 @@ config:
             "bottom": 30
 ---
 flowchart TB
+    subgraph SG_L4_RM["<b><a href='https://blayman-noaa.github.io/AA-SI_recipe_manager/levels/level-4/' target='_blank'>Level 4 Recipes</a></b>"]
+        direction LR
+        node_L4_RM_HB1603@{ shape: tag-doc, label: <a href="https://blayman-noaa.github.io/AA-SI_recipe_manager/levels/level-4/#hb1603" target="_blank"> "HB1603" </a> }
+        node_L4_RM_HB2407@{ shape: tag-doc, label: <a href="https://blayman-noaa.github.io/AA-SI_recipe_manager/levels/level-4/#hb2407" target="_blank"> "HB2407" </a> }
+    end
     subgraph SG_L4_ML["<b>Level 4 ML/AI</b>"]
         direction TB
         node_L4_hakeML@{ shape: rounded, label: <a href="https://proceedings.scipy.org/articles/JXDK4427"> "Pacific Hake" </a> }
         node_L4_apes@{ shape: rounded, label: <a href="https://github.com/nmfs-ost/AA-SI_apes"> "Resonance Frequency APES" </a> }
         node_L4_elf@{ shape: rounded, label: <a href="https://github.com/nmfs-ost/AA-SI_elf"> "Resonance Frequency ELF" </a> }
-        node_L4_hakeML@{ shape: rounded, label: <a href="https://aslopubs.onlinelibrary.wiley.com/doi/full/10.1002/lom3.10611"> "Atlantic herring" </a> }
+        node_L4_herringML@{ shape: rounded, label: <a href="https://aslopubs.onlinelibrary.wiley.com/doi/full/10.1002/lom3.10611"> "Atlantic herring" </a> }
     end
     subgraph SG_L4_GSlide["<b>Level 4 Data Input</b>"]
         direction TB
         node_L4_GS@{ shape: rounded, label: <a href="https://docs.google.com/presentation/d/13i3p6nxpBaUgsNCfry94N5wEu3aH0JsM7Qlj_ceuc6E/edit?slide=id.g3f5f8231bb8_0_633#slide=id.g3f5f8231bb8_0_633"> "Back to Presentation" </a> }
     end
     SG_L4_ML --> SG_L4_GSlide
-
+```

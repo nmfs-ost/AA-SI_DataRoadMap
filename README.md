@@ -101,7 +101,7 @@ flowchart TB
     subgraph SG_L-1_Orchestration["<b>Pipeline Orchestration</b>"]
         direction TB
         node_L-1_CT@{shape: tag-doc, label: <a href="https://8000-w-michaeljech-mshk83ga.cluster-elnmuk7bnbbzqw4vcgtaay3c52.cloudworkstations.dev/?authuser=0"> "AA Workbench" </a> }
-        node_L-1_RM@{shape: tag-doc, label: <a href="https://github.com/BLayman-NOAA/AA-SI_recipe_manager/blob/main/provenance_file_examples/provenance.yaml"> "Recipe Manager" </a> }
+        node_L-1_RM@{shape: tag-doc, label: <a href="https://blayman-noaa.github.io/AA-SI_recipe_manager"> "Recipe Manager" </a> }
         node_L-1_EDF@{shape: tag-doc, label: <a href="https://github.com/echostack-org/echodataflow"> "EchoDataFlow" </a> }
     end
     SG_L-1_DataSource --> SG_L-1_Tugboat
